@@ -22,14 +22,22 @@
 	html {font-family: 'Montserrat', sans-serif;}
 	body {font-size:100%; background: #151520; color: #fff;}
 	
-	.container {max-width:90%; margin: 0 auto;}
-	.grid {display: flex;flex-direction: row;flex-wrap:wrap;justify-content: space-around;align-content:flex-start;}
-	article.card {background: rgba(255, 255, 255, 0.07); min-width:20rem; max-width:30rem; width: 25rem;border: 1px solid rgba(255, 255, 255, 0.1); padding: 1em;margin: 0 1rem 1rem 0;}
+	.container {max-width:90%; margin: 0 auto; border: 1px solid red;}
+	.grid {border: 1px solid green; display: flex;flex-direction: row;flex-wrap:wrap;justify-content: flex-start;align-content:flex-start;margin: 0 auto; }
+	article.card {flex-grow: 1;background: rgba(255, 255, 255, 0.07); min-width:20rem; max-width:25rem; border: 1px solid rgba(255, 255, 255, 0.1); padding: 1em;margin: 0 1rem 1rem 0;}
+	
 	article.card img {width: 100%; border: 1px solid rgba(255, 255, 255, 0.1); }
 	article aside {background:  #151520; padding: 1rem; color: #eee; border: 1px solid rgba(255, 255, 255, 0.1); }
 	
-	h1 {font-family: font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: .05rem}
+	h1 {font-family: font-family: 'Montserrat', sans-serif; font-size: 3rem;font-weight: 200; letter-spacing: .05rem}
+	.card h1 {font-family: font-family: 'Montserrat', sans-serif;  font-size: 1rem; font-weight: 800; letter-spacing: .05rem}
+
 	P {font-size: .8rem;text-transform: uppercase;}
+	
+	footer{display: flex;justify-content: space-around;margin: 2rem auto; color:#505075;}
+	footer a{display: flex; color:#333350; text-decoration: none;transition: all ease-in .2s}
+	footer a:hover {color:#505075;}
+	.footercol {margin-right: 1rem;}
 	
 </style>
 
@@ -127,7 +135,26 @@
 
 </div>	<!-- end of grid -->
 	
-<footer>Footer stuff</footer>
+<footer>
+	
+	<div class="footercol">
+		<p>Add music to your library:</p>
+		<a href="https://open.spotify.com/artist/4aAgOYEZjSrFzIsHcQfAZx?si=XyxAusX2T9azUZhBjCRoVg">James Aletsch on Spotify</a>
+		<a href="https://music.apple.com/artist/james-aletsch/1495253560">James Aletsch on Apple Music</a>
+		<a href="https://www.deezer.com/en/artist/83409122">James Aletsch on Deezer</a>
+		<a href="https://music.amazon.co.uk/artists/B083ZDS95K/james-aletsch">James Aletsch on Amazon Music</a>
+		<a href="https://jamesaletsch.bandcamp.com">James Aletsch on Bandcamp</a>
+	</div>	
+	
+	<div class="footercol">
+		<p>Thought control:</p>
+		<a href="">James Aletsch on Instagram</a>
+		<a href="">James Aletsch on Twitter</a>
+		<a href="">James Aletsch on YouTube</a>
+	</div>
+
+
+</footer>
 
 </div><!-- eof container -->
 
