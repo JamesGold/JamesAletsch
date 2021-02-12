@@ -1,0 +1,60 @@
+html {box-sizing: border-box;}
+*, *:before, *:after {box-sizing: inherit;}
+/* apply a natural box layout model to all elements, but allowing components to change:  https://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+
+@mixin breakpoint($break) {
+	
+//$break-1: 22.85em; 
+//$break-2: 25.714em;
+//$break-3: 35.714em;
+//$break-4: 54.857em;
+//$break-5: 87.428em;
+//$break-6: 114.28;
+	
+	@if $break == break1 {
+    @media only screen and (min-width : 22.86em) { @content; } /* 320px / 14px = 22.85em */
+    	}
+	
+	@if $break == break2 {
+    @media only screen and (min-width : 25.714em) { @content; } /* 360px / 14px = 25.714 */
+    	}
+	
+	@else if $break == break3 {
+    	@media only screen and (min-width : 35.714em)  { @content; } /* 500px / 14px = 35.714em */
+  		}
+    
+    @else if $break == break4 {
+    	@media only screen and (min-width : 54.857em)  { @content; } /* 768px / 14px = 54.857em */
+  		}
+   
+
+    @else if $break == break5 {
+    	@media only screen and (min-width : 87.428em)  { @content; } /* 1224px / 14px = 87.428em */
+  		}
+  		
+  	  @else if $break == break6 {
+    	@media only screen and (min-width : 114.28em)  { @content; } /* 1600px / 14px = 114.28em */
+  		}	
+  		
+}
+
+@mixin clearfix {
+ // For modern browsers
+  &:before,
+  &:after {
+    content:"";
+    display:table;
+  }  &:after {
+    clear:both;
+  }  // For IE 6/7 (trigger hasLayout)
+  & {
+    zoom:1;
+  }
+}
+
+.group {
+  @include clearfix;
+}
+
+.hide{display: none;}
+
