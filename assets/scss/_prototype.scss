@@ -639,8 +639,8 @@ main {
 					color: $lemon;
 					
 					h1 {color:#fff;}
-					a, a:visited {color:#fff; text-decoration: none}
-					a:hover {color:#fff; text-decoration: underline;}
+					a, a:visited {color:#fff; text-decoration: none; border: 1px solid $lemon; padding: 1rem; display:block; background: rgba(255, 255, 255, 0.3); transition: all ease .5s}
+					a:hover {color:#fff; text-decoration: underline;background: rgba(255, 255, 255, 0.5);}
 					
 					img {//border: 1px solid #fff;
 						}
@@ -678,7 +678,7 @@ footer {
 		margin-bottom: 2rem;
 	
 		a {text-decoration: none;
-					&:visited {color:$blue;}
+					&:visited {color:rgba(92, 122, 140, 0.79);}
 					&:hover {text-decoration: underline; color: #fff;}
 				}
 			}	

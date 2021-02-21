@@ -9,6 +9,22 @@
 	],
 "creatorBuild": "33081",
 "files": {
+	"/21refresh.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/21refresh.html",
+		"oF": 0
+		},
+	"/21refreshReeases.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/21refreshReeases.html",
+		"oF": 0
+		},
 	"/assets/img/AERO.jpg": {
 		"ft": 16384,
 		"iS": 138815,
@@ -17,7 +33,7 @@
 		"oAP": "/assets/img/AERO.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -30,7 +46,7 @@
 		"oAP": "/assets/img/AREWESTILL-AW.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -43,7 +59,7 @@
 		"oAP": "/assets/img/AREWESTILL-AW3000px.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -69,7 +85,7 @@
 		"oAP": "/assets/img/FURTHER.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -82,7 +98,7 @@
 		"oAP": "/assets/img/KOMMEN.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -95,7 +111,7 @@
 		"oAP": "/assets/img/LOSTDANCEFLOOR.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -108,7 +124,7 @@
 		"oAP": "/assets/img/MELODICA.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -226,7 +242,7 @@
 		"oAP": "/IGNORE/AERO.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -239,7 +255,7 @@
 		"oAP": "/IGNORE/AREWESTILL.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -252,7 +268,7 @@
 		"oAP": "/IGNORE/FURTHER.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -265,7 +281,7 @@
 		"oAP": "/IGNORE/KOMMEN.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -278,7 +294,111 @@
 		"oAP": "/IGNORE/MELODICA.jpg",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 0,
+		"opt": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/img/AERO.jpg": {
+		"ft": 16384,
+		"iS": 138815,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/img/AERO.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/img/AREWESTILL-AW.jpg": {
+		"ft": 16384,
+		"iS": 775721,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/img/AREWESTILL-AW.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/img/AREWESTILL-AW3000px.jpg": {
+		"ft": 16384,
+		"iS": 891672,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/img/AREWESTILL-AW3000px.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/img/AREWESTILL.jpg": {
+		"ft": 16384,
+		"iS": 734869,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/img/AREWESTILL.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/img/FURTHER.jpg": {
+		"ft": 16384,
+		"iS": 757976,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/img/FURTHER.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/img/KOMMEN.jpg": {
+		"ft": 16384,
+		"iS": 636307,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/img/KOMMEN.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/img/LOSTDANCEFLOOR.jpg": {
+		"ft": 16384,
+		"iS": 668616,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/img/LOSTDANCEFLOOR.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/img/MELODICA.jpg": {
+		"ft": 16384,
+		"iS": 333067,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/img/MELODICA.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
 		"ou": "lpckwebp-none",
 		"q": 100,
 		"rq": 75
@@ -318,6 +438,81 @@
 		"oAP": "/releases.html",
 		"oF": 0
 		},
+	"/scss/_colours.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"ec": 1,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/scss/_colours.css",
+		"oF": 0,
+		"oS": 0,
+		"sct": 0
+		},
+	"/scss/_normalise.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"ec": 1,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/scss/_normalise.css",
+		"oF": 0,
+		"oS": 0,
+		"sct": 0
+		},
+	"/scss/_prototype.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"ec": 1,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/scss/_prototype.css",
+		"oF": 0,
+		"oS": 0,
+		"sct": 0
+		},
+	"/scss/_utilities.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"ec": 1,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/scss/_utilities.css",
+		"oF": 0,
+		"oS": 0,
+		"sct": 0
+		},
+	"/scss/style.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/scss/style-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/scss/style.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"ec": 1,
+		"ft": 4,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/scss/style.css",
+		"oF": 0,
+		"oS": 0,
+		"sct": 0
+		},
 	"/z-index.html": {
 		"cB": 0,
 		"ft": 8192,
@@ -344,7 +539,8 @@
 	"displayValue": "JamesAletsch",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "brackets-slime",
-	"iconImageWasSetByUser": 0
+	"iconImageWasSetByUser": 0,
+	"lastBuiltDate": 635589322.35853505
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

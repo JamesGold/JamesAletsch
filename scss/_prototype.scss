@@ -635,17 +635,29 @@ main {
 					margin: 0 auto 3rem;
 					padding: 2rem;
 					border: 1px solid black;
-					background: $dark-lemon;
+					//background: $dark-lemon;
+					background: blue;
+
 					color: $lemon;
+					
+					
+					
 					
 					h1 {color:#fff;}
 					a, a:visited {color:#fff; text-decoration: none}
 					a:hover {color:#fff; text-decoration: underline;}
 					
-					img {//border: 1px solid #fff;
-						}
+				
+				.links {
+						background: yellow;
+						padding:3rem;
+					}
+				
 					
 				}
+				
+				
+
 			
 		}
 		

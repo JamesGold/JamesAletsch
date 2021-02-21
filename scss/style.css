@@ -992,7 +992,7 @@ main .grid .card {
   margin: 0 auto 3rem;
   padding: 2rem;
   border: 1px solid black;
-  background: #515248;
+  background: blue;
   color: #f9f6eb;
 }
 main .grid .card h1 {
@@ -1006,6 +1006,11 @@ main .grid .card a:hover {
   color: #fff;
   text-decoration: underline;
 }
+main .grid .card .links {
+  background: yellow;
+  padding: 3rem;
+}
+
 footer {
   display: flex;
   flex-direction: column;
