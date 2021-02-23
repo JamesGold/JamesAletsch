@@ -538,7 +538,7 @@
       "pg" : 0
     },
     "\/scss\/style.scss" : {
-      "aP" : 0,
+      "aP" : 1,
       "bl" : 0,
       "dP" : 10,
       "ec" : 1,
@@ -547,7 +547,7 @@
       "oA" : 0,
       "oAP" : "\/scss\/style.css",
       "oF" : 0,
-      "oS" : 0,
+      "oS" : 3,
       "pg" : 0,
       "sct" : 0
     },
