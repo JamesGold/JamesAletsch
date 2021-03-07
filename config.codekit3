@@ -151,12 +151,20 @@
       "sC" : 3,
       "tS" : 0
     },
-    "\/assets\/musics\/AERO-Prework-Remix-Balanced-Low.mp3" : {
+    "\/assets\/musics\/LogicalPositivists-Balanced-Low.mp3" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/assets\/musics\/AERO-Prework-Remix-Balanced-Low.mp3",
+      "oAP" : "\/assets\/musics\/LogicalPositivists-Balanced-Low.mp3",
+      "oF" : 0
+    },
+    "\/assets\/musics\/Prework-Remix-II-Balanced-Low.mp3" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/assets\/musics\/Prework-Remix-II-Balanced-Low.mp3",
       "oF" : 0
     },
     "\/assets\/scss\/_colours.scss" : {
