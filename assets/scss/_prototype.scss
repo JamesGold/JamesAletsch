@@ -14,7 +14,7 @@
 
 // grid ref
 
-//$break-1: 22.85em; 
+//$break-1: 22.85em;
 //$break-2: 25.714em;
 //$break-3: 35.714em;
 //$break-4: 54.857em;
@@ -23,635 +23,758 @@
 
 
 
-// type	
-$headline:  'Montserrat', sans-serif; 
-$cta:'Open Sans', sans-serif; 
-$body:'Roboto', sans-serif; 
+// type
+$headline: 'Montserrat',
+sans-serif;
+$cta:'Open Sans',
+sans-serif;
+$body:'Roboto',
+sans-serif;
 
 
 //base size - set up for font sizing and grid
-html {font-size: 87.5%;}	
-body {font-family: $body; font-size: 1em; color:$dark-blue; background: $lemon; min-width: 320px;}
+html {
+	font-size: 87.5%;
+}
+
+body {
+	font-family: $body;
+	font-size: 1em;
+	color: $dark-blue;
+	background: $lemon;
+	min-width: 320px;
+}
 
 
-h1 {font-family: $headline; /* letter-spacing: .25rem;  */ font-size: 2.6rem; margin: 1rem 0 0; font-weight: 300; text-transform: uppercase;}
-h2 {font-family: $headline;; /* letter-spacing: .25rem; */ font-size: 2rem; margin: 1rem 0 0;}
-h3 {font-family: $cta; text-transform: uppercase; font-weight: 600; font-size: 1.2rem; background:#2d4859; color: rgba(255, 255, 255, 0.5); display: inline-block; padding: .3rem 1rem; margin: 0; }
-p {font-family: $body; line-height: 1.6rem;}
+h1 {
+	font-family: $headline;
+	/* letter-spacing: .25rem;  */
+	font-size: 2.6rem;
+	margin: 1rem 0 0;
+	font-weight: 300;
+	text-transform: uppercase;
+}
+
+h2 {
+	font-family: $headline;
+	;
+	/* letter-spacing: .25rem; */
+	font-size: 2rem;
+	margin: 1rem 0 0;
+}
+
+h3 {
+	font-family: $cta;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 1.2rem;
+	background: #2d4859;
+	color: rgba(255, 255, 255, 0.5);
+	display: inline-block;
+	padding: .3rem 1rem;
+	margin: 0;
+}
+
+p {
+	font-family: $body;
+	line-height: 1.6rem;
+}
 
 
 //navigation
 nav {
-	
-	border-bottom:1px solid $blue;	
+
+	border-bottom: 1px solid $blue;
 	padding: 1rem;
 	position: fixed;
-	top:0;
+	top: 0;
 	background: $blue;
 	color: $lemon;
 	width: 100vw;
 	z-index: 50;
-	
-	
-	@include breakpoint(break1) {
-		}
 
-	@include breakpoint(break2) {
-		}
 
-	@include breakpoint(break3) {
-		
-		}
+	@include breakpoint(break1) {}
+
+	@include breakpoint(break2) {}
+
+	@include breakpoint(break3) {}
 
 	@include breakpoint(break4) {
 		display: flex;
 		justify-content: space-between;
-		padding:2rem;
-		}
+		padding: 2rem;
+	}
 
 	@include breakpoint(break5) {
-		padding:3rem;
-		}
-		
-		
-		.fullburger {
-			
-			position: absolute;
-			top: 1.4rem;
-			right: 2rem;
-			
-				@include breakpoint(break2) {
-					top: 2rem;
-					}
-
-				@include breakpoint(break3) {
-					display: none;
-					}
-
-			
-			
-			.burger {
-				display: block;
-				width: 1.8rem;
-				height: .1rem;
-				margin-bottom: .4rem;
-				position: relative;
-				background: $lemon;
-				border-radius: 1px;
-				z-index: 1;				
-				transform-origin: 4px 0px;
-				transition: transform .6s cubic-bezier(0.77,0.2,0.05,1.0),
-				      		background .6s cubic-bezier(0.77,0.2,0.05,1.0),
-					  		opacity 0.55s ease;
-
-			
-					&:first-child {
-		  				transform-origin: 0% 0%;
-		  			}
-			  		&:nth-last-child(2) {
-			  			transform-origin: 0% 100%;
-					}					
-			}
-			
-		
-			
-			&.toggled .burger {
-				opacity: 1;
-				transform: rotate(-45deg) translate(-2px, -1px);
-				background: $lemon;
-				
-					&:nth-last-child(2) {
-						opacity: 0;
-						transform: rotate(0deg) scale(0.2, 0.2);
-					}
-					
-					&:nth-last-child(3) {
-						transform: rotate(45deg) translate(0, -1px);
-					}					
-				}
-			
-		}
-
-		.title h1{
-			margin:0;
-			display: block;
-			font-size: 1.8rem;
-			z-index: 555;
-		
-				@include breakpoint(break2) {
-					font-size: 2.6rem;
-					}
-				@include breakpoint(break3) {
-					text-align: center;
-					}
-				
-				@include breakpoint(break4) {
-					text-align: left;
-					}		
-			}
-			
-			
-		ul {
-			height:100vh;
-			width: 80vw;
-			background: $blue;
-			padding: 3rem 1rem;
-			line-height: 3rem;
-			position:absolute;
-			top:3rem;
-			left:-100vw;
-			//border-top: 1px solid $dark-blue;
-			transition: .6s cubic-bezier(0.77,0.2,0.05,1.0) all;
-
-			
-			&.open {
-				left:0rem;
-				background: $blue;
-				height:100vh;
-				list-style: none;
-				transition: .6s cubic-bezier(0.77,0.2,0.05,1.0) all;
-				
-				 	@include breakpoint(break3) {
-					height:auto;
-					background:none;
-					display: flex;
-					justify-content: space-around;
-					padding: 0;
-					margin: 0;
-					width: auto;
-					}
-				
-				}
-			
-			
-			
-				@include breakpoint(break3) {
-					position: static;
-					border: none;
-					height:auto;
-					background:none;
-					display: flex;
-					justify-content: space-around;
-					padding: 0;
-					margin: 0 auto;
-				}
-
-
-				@include breakpoint(break4) {
-					position: static;
-					border: none;
-					height:auto;
-					display: flex;
-					justify-content:flex-end;
-					padding: 0;
-					margin: 0;
-					width: auto;
-				}
-
-
-
-
-
-			
-			
-						
-			li {
-				border-top: 1px solid $dark-blue;
-				padding: 1rem;
-				list-style: none;
-				margin-right: 2rem;
-				font-family: $headline;
-				letter-spacing: .25rem;
-				font-size: 1.4rem;
-				text-transform: uppercase;
-				transition: ease-in all .5s;
-				
-				 @include breakpoint(break3) {
-					 border:none;
-					 padding: 0;
-					}
-				
-
-				
-				&:last-ot-type {
-	
-					margin-right: 0;	
-					}
-				
-				a{
-					text-decoration: none;
-					color: $dark-blue;
-
-					&:hover, :active {
-						text-decoration: underline;
-						color: $lemon;
-						}
-					}
-		
-				}
-			}	
-	
+		padding: 3rem;
 	}
-	
-//hero area	
-	
-header {
-	
-		
-				background: url(../../assets/img/AREWESTILL-AW.jpg) no-repeat;
-				background-position:center center;
-				background-attachment:scroll;
-				background-size: cover;
-				width: 100%;
-				height: 100vh;
-				display: flex;
-				flex-direction: column ;
-				justify-content: center;
-	
-				
+
+
+	.fullburger {
+
+		position: absolute;
+		top: 1.4rem;
+		right: 2rem;
+
 		@include breakpoint(break2) {
-			margin-top: 5rem;	
-		}	
-		@include breakpoint(break3) {
-			margin-top: 7rem;
+			top: 2rem;
 		}
 
-		@include breakpoint(break5) {
-			margin-top: 9rem;}
+		@include breakpoint(break3) {
+			display: none;
+		}
 
-			
-			.hero {
-				background: rgba(255, 255, 255, 0.66);
-				width: 80vw;
-				min-height: 26vh;
-				margin: 0 auto;
-				text-align: center;
-				padding: 2rem;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				
-				
-					h1 {margin: 0;
-						}
-				
-					@include breakpoint(break2) {
-					width: 70vw;
-					}	
-					@include breakpoint(break3) {
-					width: 60vw;
-					}				
-					@include breakpoint(break4) {
-					width: 50vw;
-					}					
-					@include breakpoint(break5) {
-					width: 40vw;
-					}	
+
+
+		.burger {
+			display: block;
+			width: 1.8rem;
+			height: .1rem;
+			margin-bottom: .4rem;
+			position: relative;
+			background: $lemon;
+			border-radius: 1px;
+			z-index: 1;
+			transform-origin: 4px 0px;
+			transition: transform .6s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+				background .6s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+				opacity 0.55s ease;
+
+
+			&:first-child {
+				transform-origin: 0% 0%;
 			}
-			
-			
-			a {text-decoration: none;
-				&:hover {text-decoration: underline; color: #fff;}
-			}	
-			
-			h2 {background: $dark-blue;
-				color: #fff;
-				margin: 1rem auto;
-				padding: 2rem;
-				width: 60vw;
-				text-align: center;
 
-					@include breakpoint(break2) {
-					width: 70vw;
-					}	
-					@include breakpoint(break3) {
-					width: 60vw;
-					}				
-					@include breakpoint(break4) {
-					width: 50vw;
-					}					
-					@include breakpoint(break5) {
-					width: 40vw;
-					}	
+			&:nth-last-child(2) {
+				transform-origin: 0% 100%;
+			}
+		}
 
-				}	
-	}	
-	
 
-	
-//main content		
-	
-main {
-	
-		padding: 0;
-		margin: 11rem auto 2rem;
-		
 
-		
+		&.toggled .burger {
+			opacity: 1;
+			transform: rotate(-45deg) translate(-2px, -1px);
+			background: $lemon;
+
+			&:nth-last-child(2) {
+				opacity: 0;
+				transform: rotate(0deg) scale(0.2, 0.2);
+			}
+
+			&:nth-last-child(3) {
+				transform: rotate(45deg) translate(0, -1px);
+			}
+		}
+
+	}
+
+	.title h1 {
+		margin: 0;
+		display: block;
+		font-size: 1.8rem;
+		z-index: 555;
+
 		@include breakpoint(break2) {
-			margin-top: 11rem;	
-		}	
+			font-size: 2.6rem;
+		}
+
 		@include breakpoint(break3) {
-			margin-top: 11rem;
+			text-align: center;
+		}
+
+		@include breakpoint(break4) {
+			text-align: left;
+		}
+	}
+
+
+	ul {
+		height: 100vh;
+		width: 80vw;
+		background: $blue;
+		padding: 3rem 1rem;
+		line-height: 3rem;
+		position: absolute;
+		top: 3rem;
+		left: -100vw;
+		//border-top: 1px solid $dark-blue;
+		transition: .6s cubic-bezier(0.77, 0.2, 0.05, 1.0) all;
+
+
+		&.open {
+			left: 0rem;
+			background: $blue;
+			height: 100vh;
+			list-style: none;
+			transition: .6s cubic-bezier(0.77, 0.2, 0.05, 1.0) all;
+
+			@include breakpoint(break3) {
+				height: auto;
+				background: none;
+				display: flex;
+				justify-content: space-around;
+				padding: 0;
+				margin: 0;
+				width: auto;
+			}
+
+		}
+
+
+
+		@include breakpoint(break3) {
+			position: static;
+			border: none;
+			height: auto;
+			background: none;
+			display: flex;
+			justify-content: space-around;
+			padding: 0;
+			margin: 0 auto;
+		}
+
+
+		@include breakpoint(break4) {
+			position: static;
+			border: none;
+			height: auto;
+			display: flex;
+			justify-content: flex-end;
+			padding: 0;
+			margin: 0;
+			width: auto;
+		}
+
+
+
+
+
+
+
+
+		li {
+			border-top: 1px solid $dark-blue;
+			padding: 1rem;
+			list-style: none;
+			margin-right: 2rem;
+			font-family: $headline;
+			letter-spacing: .25rem;
+			font-size: 1.4rem;
+			text-transform: uppercase;
+			transition: ease-in all .5s;
+
+			@include breakpoint(break3) {
+				border: none;
+				padding: 0;
+			}
+
+
+
+			&:last-ot-type {
+
+				margin-right: 0;
+			}
+
+			a {
+				text-decoration: none;
+				color: $dark-blue;
+
+				&:hover,
+				:active {
+					text-decoration: underline;
+					color: $lemon;
+				}
+			}
+
+		}
+	}
+
+}
+
+//hero area
+
+header {
+
+
+	background: url(../../assets/img/AREWESTILL-AW.jpg) no-repeat;
+	background-position: center center;
+	background-attachment: scroll;
+	background-size: cover;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+
+	@include breakpoint(break2) {
+		margin-top: 5rem;
+	}
+
+	@include breakpoint(break3) {
+		margin-top: 7rem;
+	}
+
+	@include breakpoint(break5) {
+		margin-top: 9rem;
+	}
+
+
+	.hero {
+		background: rgba(255, 255, 255, 0.66);
+		width: 80vw;
+		min-height: 26vh;
+		margin: 0 auto;
+		text-align: center;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+
+		h1 {
+			margin: 0;
+		}
+
+		@include breakpoint(break2) {
+			width: 70vw;
+		}
+
+		@include breakpoint(break3) {
+			width: 60vw;
+		}
+
+		@include breakpoint(break4) {
+			width: 50vw;
 		}
 
 		@include breakpoint(break5) {
-			margin-top: 12rem;
-		}		
-		
-		img {max-width: 100%;}
-		
-		
-		section {
-			//border: 1px solid red; //testing
-			//min-height: 80vh;
-			width: 90vw;
-			margin: 0 5vw 4rem;
-			display: flex;
-			align-items:center;
+			width: 40vw;
+		}
+	}
+
+
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+			color: #fff;
+		}
+	}
+
+	h2 {
+		background: $dark-blue;
+		color: #fff;
+		margin: 1rem auto;
+		padding: 2rem;
+		width: 60vw;
+		text-align: center;
+
+		@include breakpoint(break2) {
+			width: 70vw;
+		}
+
+		@include breakpoint(break3) {
+			width: 60vw;
+		}
+
+		@include breakpoint(break4) {
+			width: 50vw;
+		}
+
+		@include breakpoint(break5) {
+			width: 40vw;
+		}
+
+	}
+}
+
+
+
+//main content
+
+main {
+
+	padding: 0;
+	margin: 11rem auto 2rem;
+
+
+
+	@include breakpoint(break2) {
+		margin-top: 11rem;
+	}
+
+	@include breakpoint(break3) {
+		margin-top: 11rem;
+	}
+
+	@include breakpoint(break5) {
+		margin-top: 12rem;
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+
+	section {
+		//border: 1px solid red; //testing
+		//min-height: 80vh;
+		width: 90vw;
+		margin: 0 5vw 4rem;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		overflow: hidden;
+
+
+		@include breakpoint(break4) {
+			flex-direction: row;
+		}
+
+
+		&.callout {
+			background: $dark-topaz;
+			min-height: 60vh;
+			padding: 3rem;
+			width: 100%;
+			margin: 0 0 4rem 0;
 			flex-direction: column;
-			overflow: hidden;
+			text-align: center;
+			justify-content: center;
+
+			h1 {
+				color: $topaz;
+				font-size: 4rem;
+			}
+
+			h3 {
+				border: 1px solid #fff;
+				padding: 1rem 2rem;
+				margin: 2rem;
+			}
+
+			a h3 {
+				&:hover {
+					background: #fff;
+					border: 1px solid $topaz;
+					color: $topaz;
+				}
+			}
+
+			p {
+				color: $topaz;
+			}
+		}
+
+
+		&.left {
+			color: $dark-rose;
+
+			h3 {
+				background: $dark-rose;
+				color: #fff;
+			}
+
+		}
+
+		&.alt {
+			color: $dark-lemon;
+
+			h3 {
+				background: $dark-lemon;
+				color: #fff;
+			}
+
+		}
+
+
+		.imgarea {
+
+			width: 100vw;
+			//height: 60vh;
+
+			//z-index: -2;
+			object-fit: cover;
+			margin-bottom: -5px;
+			margin-left: -5px;
+
+		}
+
+
+
+		.textarea {
+			width: 90%;
+			text-align: center;
+			margin: 4rem auto 0;
+			padding: 2rem;
+			margin-bottom: -50%;
+			z-index: -1;
 
 
 			@include breakpoint(break4) {
-				flex-direction: row;
-				}	
-				
-				
-			&.callout	{
-				background: $dark-topaz;
-				min-height: 60vh;
-				padding: 3rem;
-				width: 100%;
-				margin: 0 0 4rem 0;
-				flex-direction: column;
-				text-align: center;
-				justify-content: center;				
-				
-				 h1 {color: $topaz; font-size: 4rem;}
-				 h3 {border: 1px solid #fff;padding: 1rem 2rem;margin: 2rem;}
-				 a h3 {
-					 &:hover {background: #fff; border: 1px solid $topaz; color: $topaz;}
-				 }
-				 p {color: $topaz;}
-			}
-							
-			
-			&.left {
-				color: $dark-rose;		
-				h3 {background: $dark-rose; color: #fff;}
-				
-			}
-			
-			&.alt{
-				color: $dark-lemon;		
-				h3 {background: $dark-lemon; color: #fff;}
-				
-			}			
-		
-			
-			.imgarea {
-
-				width: 100vw;
-				//height: 60vh;
-
-				//z-index: -2;
-				object-fit: cover;
-				margin-bottom: -5px;
-				margin-left: -5px;
-				
+				h1 {
+					font-size: 3rem;
 				}
 
-								
-	
-			.textarea{
-				width: 90%;
-				text-align: center;
-				margin: 4rem auto 0;
+				p {
+					font-size: 1.2rem;
+					margin: 2rem;
+					font-weight: lighter;
+				}
+
+			}
+
+
+			&.lefttext {
+				background: $rose;
 				padding: 2rem;
-				margin-bottom: -50%;
-				z-index: -1;
-				
-				
-					@include breakpoint(break4) {
-							h1 {font-size: 3rem;}
-							p {font-size: 1.2rem; margin: 2rem; font-weight:lighter;}
-			
-						}
+				color: $dark-rose;
 
-			
-					&.lefttext {
-						background: $rose;
-						padding: 2rem;
-						color: $dark-rose;
-						
-					@include breakpoint(break2) {
-						width: 80%;	
-						}	
-				 
-					@include breakpoint(break3) {
-						width: 70%;	
-						margin-bottom: -20%;
-						}				
-
-					@include breakpoint(break4) {
-						width: 60%;	
-						margin: auto;
-						margin-right:-20%;						
-						}	
-					
-					@include breakpoint(break5) {
-						margin: auto;
-						margin-right:-10%;
-						padding: 4rem;
-
-						}		
-					}
-					
-				
-					&.alttext {
-						background: #fff;
-						padding: 2rem;
-						color: $dark-lemon;
-					
-					@include breakpoint(break2) {
-						width: 80%;	
-						}	
-				 
-					@include breakpoint(break3) {
-						width: 60%;	
-						margin-bottom: -20%;
-						}				
-
-					@include breakpoint(break4) {
-						width: 60%;	
-						margin: auto;
-						margin-right:-20%;						
-						}	
-					
-					@include breakpoint(break5) {
-						width: 40%;	
-						margin: auto;
-						margin-right:-10%;
-						padding: 4rem;
-						}		
-					}
-				}	
-					
-					
-				&.offer {
-					
-					//border: 1px solid red; //testing
-					display: flex;
-					background: $topaz;
-
-					
-					
-				.offertext {
-					text-align: center;
-					background: $topaz;
-					padding: 2rem;
-					color: $dark-topaz;
-					margin: 0 auto;
-					
-					@include breakpoint(break4) {
-						width:40%;
-						padding: 2rem 3rem;
-						}
-						
-					@include breakpoint(break5) {
-						padding: 2rem 4rem;
-						}	
-					}
-				
-
-				
-					@include breakpoint(break2) {
-						
-						}	
-				 
-					@include breakpoint(break3) {
-						
-						}				
-
-					@include breakpoint(break4) {
-					
-						}	
-					
-					@include breakpoint(break5) {
-						
-						}
-				}	
-				
-				&.slide-section {
-					background: #fff;
-//					height: 80vh;
-					padding: 3rem 0;
-					width:100%;
-					max-width: 100%;
-					margin: 0 0 4rem 0;
-					display: block;
-					align-items:center;
-					flex-direction: column;
-					color:$lemon;
-					
-
-					
-					.slide-section-title {
-						text-align: center;
-						color:$dark-lemon;
-						
-						@include breakpoint(break3) {
-							
-							
-							h1 {font-size: 3.4rem; margin-bottom: 3rem; }
-							
-							}  
-						}
-					
-					 
-					 a h3 {border: 1px solid $lemon; background: $dark-lemon ;padding: 1rem 2rem;margin: 0 auto; color: $lemon; display: block; display: block; width: 20rem; text-align: center;
-					
-					 &:hover {background: #fff; border: 1px solid $dark-lemon; color: $dark-lemon;}
-					}
-					
-					
-					.slide-group {
-						margin: 3rem 0;
-						min-width: 100%;
-						display:flex;
-						text-align: center;
-						//justify-content: center;
-						overflow-x: scroll;
-						scroll-snap-type: x mandatory;
-						scroll-padding: 0 50%;
-						
-						.slide-item {
-							//height: 50vh;
-							background: $dark-lemon;
-							color: $lemon;
-							min-width:60vw;
-							width:60vw;
-							max-width:70vw;
-							margin: 0 1rem 0 0;
-							padding: 2rem;
-							scroll-snap-align: center;
-							overflow: visible;
-							
-							 img { margin: 0 auto; opacity: 1;}
-							
-							@include breakpoint(break4) {
-								min-width:40vw;
-								width: 40vw;
-							
-							} 
-							
-							@include breakpoint(break5) {
-								min-width:30vw;
-								width: 30vw;
-							
-							} 
-							
-							
-						}
-						
-						
-					}	
-					
+				@include breakpoint(break2) {
+					width: 80%;
 				}
 
-			
-		}
-		
-		.grid-title {margin: 5rem auto 3rem; text-align: center;}
+				@include breakpoint(break3) {
+					width: 70%;
+					margin-bottom: -20%;
+				}
 
-		.grid {
+				@include breakpoint(break4) {
+					width: 60%;
+					margin: auto;
+					margin-right: -20%;
+				}
+
+				@include breakpoint(break5) {
+					margin: auto;
+					margin-right: -10%;
+					padding: 4rem;
+
+				}
+			}
+
+
+			&.alttext {
+				background: #fff;
+				padding: 2rem;
+				color: $dark-lemon;
+
+				@include breakpoint(break2) {
+					width: 80%;
+				}
+
+				@include breakpoint(break3) {
+					width: 60%;
+					margin-bottom: -20%;
+				}
+
+				@include breakpoint(break4) {
+					width: 60%;
+					margin: auto;
+					margin-right: -20%;
+				}
+
+				@include breakpoint(break5) {
+					width: 40%;
+					margin: auto;
+					margin-right: -10%;
+					padding: 4rem;
+				}
+			}
+		}
+
+
+		&.offer {
+
+			//border: 1px solid red; //testing
 			display: flex;
-			flex-wrap: wrap;
-			
-				
-				.card {
-					max-width:400px;
-					margin: 0 auto 3rem;
-					padding: 2rem;
-					border: 1px solid black;
+			background: $topaz;
+
+
+
+			.offertext {
+				text-align: center;
+				background: $topaz;
+				padding: 2rem;
+				color: $dark-topaz;
+				margin: 0 auto;
+
+				@include breakpoint(break4) {
+					width: 40%;
+					padding: 2rem 3rem;
+				}
+
+				@include breakpoint(break5) {
+					padding: 2rem 4rem;
+				}
+			}
+
+
+
+			@include breakpoint(break2) {}
+
+			@include breakpoint(break3) {}
+
+			@include breakpoint(break4) {}
+
+			@include breakpoint(break5) {}
+		}
+
+		&.slide-section {
+			background: #fff;
+			//					height: 80vh;
+			padding: 3rem 0;
+			width: 100%;
+			max-width: 100%;
+			margin: 0 0 4rem 0;
+			display: block;
+			align-items: center;
+			flex-direction: column;
+			color: $lemon;
+
+
+
+			.slide-section-title {
+				text-align: center;
+				color: $dark-lemon;
+
+				@include breakpoint(break3) {
+
+
+					h1 {
+						font-size: 3.4rem;
+						margin-bottom: 3rem;
+					}
+
+				}
+			}
+
+
+			a h3 {
+				border: 1px solid $lemon;
+				background: $dark-lemon;
+				padding: 1rem 2rem;
+				margin: 0 auto;
+				color: $lemon;
+				display: block;
+				display: block;
+				width: 20rem;
+				text-align: center;
+
+				&:hover {
+					background: #fff;
+					border: 1px solid $dark-lemon;
+					color: $dark-lemon;
+				}
+			}
+
+
+			.slide-group {
+				margin: 3rem 0;
+				min-width: 100%;
+				display: flex;
+				text-align: center;
+				//justify-content: center;
+				overflow-x: scroll;
+				scroll-snap-type: x mandatory;
+				scroll-padding: 0 50%;
+
+				.slide-item {
+					//height: 50vh;
 					background: $dark-lemon;
 					color: $lemon;
-					
-					h1 {color:#fff;}
-					a, a:visited {color:#fff; text-decoration: none; border: 1px solid $lemon; padding: 1rem; display:block; background: rgba(255, 255, 255, 0.3); transition: all ease .5s}
-					a:hover {color:#fff; text-decoration: underline;background: rgba(255, 255, 255, 0.5);}
-					
-					img {//border: 1px solid #fff;
-						}
-					
+					min-width: 60vw;
+					width: 60vw;
+					max-width: 70vw;
+					margin: 0 1rem 0 0;
+					padding: 2rem;
+					scroll-snap-align: center;
+					overflow: visible;
+
+					img {
+						margin: 0 auto;
+						opacity: 1;
+					}
+
+					@include breakpoint(break4) {
+						min-width: 40vw;
+						width: 40vw;
+
+					}
+
+					@include breakpoint(break5) {
+						min-width: 30vw;
+						width: 30vw;
+
+					}
+
+
 				}
-			
+
+
+			}
+
 		}
-		
-		
-			
-	} //end main
+
+
+	}
+
+	.grid-title {
+		margin: 5rem auto 3rem;
+		text-align: center;
+	}
+
+	.grid {
+		display: flex;
+		flex-wrap: wrap;
+
+
+		.card {
+			max-width: 400px;
+			margin: 0 auto 3rem;
+			padding: 2rem;
+			border: 1px solid black;
+			background: $dark-lemon;
+			color: $lemon;
+
+			h1 {
+				color: #fff;
+			}
+
+			a,
+			a:visited {
+				color: #fff;
+				text-decoration: none;
+				border: 1px solid $lemon;
+				padding: 1rem;
+				display: block;
+				background: rgba(255, 255, 255, 0.3);
+				transition: all ease .5s
+			}
+
+			a:hover {
+				color: #fff;
+				text-decoration: underline;
+				background: rgba(255, 255, 255, 0.5);
+			}
+
+			img {
+				//border: 1px solid #fff;
+			}
+
+		}
+
+	}
+
+
+
+}
+
+//end main
 
 
 
@@ -668,32 +791,43 @@ footer {
 	justify-content: space-between;
 	text-align: center;
 	background: $dark-blue;
-	color:$blue;
-	padding:3rem;
-	width:100%;
-	z-index:-20;
-	
+	color: $blue;
+	padding: 3rem;
+	width: 100%;
+	z-index: -20;
+
 	.footerarea {
-		
+
 		margin-bottom: 2rem;
-	
-		a {text-decoration: none;
-					&:visited {color:rgba(92, 122, 140, 0.79);}
-					&:hover {text-decoration: underline; color: #fff;}
-				}
-			}	
-	
-		@include breakpoint(break4) {
+
+		a {
+			text-decoration: none;
+
+			&:visited {
+				color: rgba(92, 122, 140, 0.79);
+			}
+
+			&:hover {
+				text-decoration: underline;
+				color: #fff;
+			}
+		}
+	}
+
+	@include breakpoint(break4) {
 		flex-direction: row;
 		justify-content: space-between;
-		
-			.footerarea {min-width:20%; width:25%; padding: 1rem; 
-				
-			}
-		
+
+		.footerarea {
+			min-width: 20%;
+			width: 25%;
+			padding: 1rem;
+
 		}
-	
-	
-		
-	
+
 	}
+
+
+
+
+}
