@@ -135,8 +135,9 @@ def main():
                 f.unlink()
                 removed += 1
 
-    # Newest first; undated photos go last, in filename order.
-    entries.sort(key=lambda e: (e['date'] is not None, e['date'] or ''), reverse=True)
+    # Newest first; undated photos go last. Filenames start with the date and time
+    # taken, so they break ties between photos from the same day.
+    entries.sort(key=lambda e: (e['date'] is not None, e['date'] or '', e['id']), reverse=True)
     MANIFEST.write_text(json.dumps(entries, indent=2) + '\n')
 
     print('gallery.json: {} photos, {} stale files removed'.format(len(entries), removed))
