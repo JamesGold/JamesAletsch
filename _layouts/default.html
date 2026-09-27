@@ -12,7 +12,17 @@
 {%- if page.gallery %}
 <script src="{{ '/assets/js/gallery.js' | relative_url }}"></script>
 <script>
-  loadGallery(document.getElementById('gallery')).then(function (p) { document.getElementById('pcount').textContent = p.length || ''; });
+  loadGallery(document.getElementById('gallery')).then(function (photos) {
+    document.getElementById('pcount').textContent = photos.length || '';
+    // The hero photo opens in the same viewer as the Inputs grid
+    var hero = document.querySelector('[data-photo]');
+    if (hero) hero.addEventListener('click', function (e) {
+      var i = photos.findIndex(function (p) { return p.id === hero.dataset.photo; });
+      if (i < 0) return;
+      e.preventDefault();
+      openLightbox(photos, i, hero);
+    });
+  });
 </script>
 {%- endif %}
 </body>

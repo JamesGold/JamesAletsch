@@ -100,3 +100,9 @@ header h1 a { border: 0; }
 .release .notes { margin-top: 24px; }
 .release + nav { display: flex; justify-content: space-between; gap: 16px; margin: 64px 0 96px; }
 
+
+/* hero: the latest uploaded photo, full column width; tall portraits are cropped to fit the screen */
+.hero { margin: 0 0 96px; }
+.hero a { display: block; border: 0; cursor: zoom-in; }
+.hero img { aspect-ratio: auto; max-height: 75svh; object-fit: cover; }
+.hero figcaption { margin-top: 8px; }

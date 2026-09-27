@@ -10,6 +10,17 @@ gallery: true
     {% include nav.html %}
   </header>
 
+  {%- comment -%} Hero: the newest photo by date taken (the gallery is sorted newest first) {%- endcomment -%}
+  {%- assign hero = site.data.gallery | first -%}
+  {%- if hero %}
+  <figure class="hero">
+    <a href="#inputs" data-photo="{{ hero.id }}"><img src="{{ hero.full | prepend: '/' | relative_url }}" srcset="{{ hero.thumb | prepend: '/' | relative_url }} 800w, {{ hero.full | prepend: '/' | relative_url }} 2000w" sizes="(max-width: 652px) calc(100vw - 32px), 620px" width="{{ hero.width }}" height="{{ hero.height }}" alt="{{ hero.alt | escape }}" fetchpriority="high" style="background: {{ hero.colour }}"></a>
+    {%- if hero.caption != "" %}
+    <figcaption class="m">{{ hero.caption }}</figcaption>
+    {%- endif %}
+  </figure>
+  {%- endif %}
+
   <section>
     <h2>Latest</h2>
     <div class="latest">

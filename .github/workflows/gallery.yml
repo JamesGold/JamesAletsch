@@ -41,7 +41,7 @@ jobs:
             git fetch --quiet origin "$branch"
             git reset --quiet --hard "origin/$branch"
             python3 scripts/build_gallery.py
-            git add -A assets/gallery gallery.json
+            git add -A assets/gallery gallery.json _data/gallery.json
             if git diff --cached --quiet; then
               echo "Gallery already up to date"
               exit 0

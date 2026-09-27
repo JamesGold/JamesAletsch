@@ -36,7 +36,8 @@ except ImportError:
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / 'photos'
 OUT = ROOT / 'assets' / 'gallery'
-MANIFEST = ROOT / 'gallery.json'
+MANIFEST = ROOT / 'gallery.json'          # fetched by the page's JavaScript (Inputs grid, lightbox)
+DATA = ROOT / '_data' / 'gallery.json'    # same list for Jekyll; its first (newest) photo is the homepage hero
 CAPTIONS = SRC / 'captions.json'
 
 SIZES = {'thumb': 800, 'full': 2000}  # longest edge in px
@@ -138,7 +139,10 @@ def main():
     # Newest first; undated photos go last. Filenames start with the date and time
     # taken, so they break ties between photos from the same day.
     entries.sort(key=lambda e: (e['date'] is not None, e['date'] or '', e['id']), reverse=True)
-    MANIFEST.write_text(json.dumps(entries, indent=2) + '\n')
+    manifest = json.dumps(entries, indent=2) + '\n'
+    MANIFEST.write_text(manifest)
+    DATA.parent.mkdir(exist_ok=True)
+    DATA.write_text(manifest)
 
     print('gallery.json: {} photos, {} stale files removed'.format(len(entries), removed))
     if broken:
