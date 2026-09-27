@@ -1,0 +1,72 @@
+{%- comment -%}
+  schema.org structured data. Tells search engines and AI tools who the artist is,
+  which profiles are official (sameAs), and what each release contains.
+{%- endcomment -%}
+{%- assign artist_id = "/#artist" | absolute_url -%}
+{%- capture artist_ref -%}{"@type": "MusicGroup", "@id": {{ artist_id | jsonify }}, "name": {{ site.artist.name | jsonify }}, "url": {{ "/" | absolute_url | jsonify }}}{%- endcapture -%}
+<script type="application/ld+json">
+{%- if page.collection == "outputs" %}
+{%- case page.format -%}
+  {%- when "Album" -%}{%- assign release_type = "AlbumRelease" -%}
+  {%- when "EP" -%}{%- assign release_type = "EPRelease" -%}
+  {%- else -%}{%- assign release_type = "SingleRelease" -%}
+{%- endcase %}
+{
+  "@context": "https://schema.org",
+  "@type": "MusicAlbum",
+  "@id": {{ page.url | absolute_url | append: "#album" | jsonify }},
+  "name": {{ page.title | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "image": {{ "/assets/img/800/" | append: page.cover | absolute_url | jsonify }},
+  "datePublished": {{ page.date | date: "%Y-%m-%d" | jsonify }},
+  "albumReleaseType": "https://schema.org/{{ release_type }}",
+  "albumProductionType": "https://schema.org/StudioAlbum",
+  "genre": {{ site.artist.genre | jsonify }},
+  "byArtist": {{ artist_ref }},
+  "numTracks": {{ page.tracks.size }},
+  "track": [
+    {%- for t in page.tracks %}
+    {%- assign m = t.duration | divided_by: 60 -%}{%- assign s = t.duration | modulo: 60 %}
+    {"@type": "MusicRecording", "position": {{ forloop.index }}, "name": {{ t.title | jsonify }}, "duration": "PT{{ m }}M{{ s }}S", "byArtist": {"@id": {{ artist_id | jsonify }}}}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "sameAs": [{{ page.bandcamp.url | jsonify }}{% if page.apple %}, {{ page.apple | jsonify }}{% endif %}{% if page.spotify %}, {{ page.spotify | jsonify }}{% endif %}]
+}
+{%- else %}
+{%- assign releases = site.outputs | sort: "date" | reverse -%}
+{%- assign latest = releases.first %}
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": {{ "/#website" | absolute_url | jsonify }},
+      "url": {{ "/" | absolute_url | jsonify }},
+      "name": {{ site.artist.name | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "publisher": {"@id": {{ artist_id | jsonify }}}
+    },
+    {
+      "@type": "MusicGroup",
+      "@id": {{ artist_id | jsonify }},
+      "name": {{ site.artist.name | jsonify }},
+      "url": {{ "/" | absolute_url | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "genre": {{ site.artist.genre | jsonify }},
+      "foundingLocation": {"@type": "Place", "name": {{ site.artist.location | jsonify }}},
+      "image": {{ "/assets/img/800/" | append: latest.cover | absolute_url | jsonify }},
+      "sameAs": [
+        {%- for l in site.artist.links %}
+        {{ l.url | jsonify }}{% unless forloop.last %},{% endunless %}
+        {%- endfor %}
+      ],
+      "album": [
+        {%- for r in releases %}
+        {"@type": "MusicAlbum", "@id": {{ r.url | absolute_url | append: "#album" | jsonify }}, "name": {{ r.title | jsonify }}, "url": {{ r.url | absolute_url | jsonify }}, "datePublished": {{ r.date | date: "%Y-%m-%d" | jsonify }}}{% unless forloop.last %},{% endunless %}
+        {%- endfor %}
+      ]
+    }
+  ]
+}
+{%- endif %}
+</script>

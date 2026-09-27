@@ -1,4 +1,39 @@
 # GitHub Pages (Jekyll) settings.
+
+title: James Aletsch — UK electronic music maker
+description: UK based, European centred, music maker. Creating music for the dance floor in your mind. Or, just nice stuff to get lost in.
+url: https://jamesaletsch.com
+
+artist:
+  name: James Aletsch
+  tagline: Music for the dance floor in your mind.
+  location: United Kingdom
+  genre: Electronic music
+  spotify: https://open.spotify.com/artist/4aAgOYEZjSrFzIsHcQfAZx
+  # Official profiles: shown under Links, and listed in the structured data
+  # so search engines and AI tools know these accounts are the same artist.
+  links:
+    - { label: Bandcamp, url: "https://jamesaletsch.bandcamp.com" }
+    - { label: Apple Music, url: "https://music.apple.com/gb/artist/james-aletsch/1495253560" }
+    - { label: Spotify, url: "https://open.spotify.com/artist/4aAgOYEZjSrFzIsHcQfAZx" }
+    - { label: Deezer, url: "https://www.deezer.com/en/artist/83409122" }
+    - { label: Amazon Music, url: "https://music.amazon.co.uk/artists/B083ZDS95K/james-aletsch" }
+    - { label: SoundCloud, url: "https://soundcloud.com/user-363998037" }
+    - { label: YouTube, url: "https://www.youtube.com/channel/UC3zdemA0dFnrOscTuxaa2MA" }
+    - { label: Instagram, url: "https://www.instagram.com/jamesaletsch/" }
+    - { label: Discogs, url: "https://www.discogs.com/artist/8007127-James-Aletsch" }
+
+# Each release is one file in _outputs/. Jekyll lists them on the homepage
+# (newest first, by date) and gives each its own page at /outputs/<file-name>/.
+collections:
+  outputs:
+    output: true
+    permalink: /outputs/:name/
+
+defaults:
+  - scope: { type: outputs }
+    values: { layout: output }
+
 # Keep the full-size originals and build tooling off the public website;
 # only the metadata-stripped copies in assets/gallery/ are published.
 # The design concepts stay in the repo for reference but aren't published.

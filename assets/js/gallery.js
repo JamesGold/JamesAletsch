@@ -4,6 +4,10 @@
 
 var SITE_ROOT = typeof SITE_ROOT === 'string' ? SITE_ROOT : ''; // set by pages outside the site root
 
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+}
+
 function loadGallery(el, opts) {
   opts = opts || {};
   return fetch(SITE_ROOT + 'gallery.json', { cache: 'no-cache' })

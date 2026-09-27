@@ -5,3 +5,6 @@ assets/musics/
 __pycache__/
 # local working screenshots (may show tokens)
 screenshots/
+# Jekyll build output
+_site/
+.jekyll-cache/

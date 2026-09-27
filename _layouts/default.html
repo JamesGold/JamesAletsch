@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include head.html %}
+</head>
+<body>
+<div class="wrap">
+{{ content }}
+  <footer><span>© {{ site.artist.name }}</span><span>{{ site.artist.tagline }}</span></footer>
+</div>
+<script src="{{ '/assets/js/site.js' | relative_url }}"></script>
+{%- if page.gallery %}
+<script src="{{ '/assets/js/gallery.js' | relative_url }}"></script>
+<script>
+  loadGallery(document.getElementById('gallery')).then(function (p) { document.getElementById('pcount').textContent = p.length || ''; });
+</script>
+{%- endif %}
+</body>
+</html>

@@ -1,0 +1,3 @@
+{%- assign r = include.release -%}
+{%- assign spotify = r.spotify | default: site.artist.spotify -%}
+<div class="links"><a href="{{ r.bandcamp.url }}" target="_blank" rel="noopener">Bandcamp</a>{% if r.apple %}<a href="{{ r.apple }}" target="_blank" rel="noopener">Apple Music</a>{% endif %}<a href="{{ spotify }}" target="_blank" rel="noopener">Spotify</a></div>

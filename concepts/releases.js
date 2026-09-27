@@ -1,3 +1,4 @@
+// Frozen snapshot for the design concepts only. The live site's releases live in _outputs/.
 // Single source of truth for the discography.
 // Add a new release at the top of the list; every page picks it up.
 // bandcamp.type/id feed the embedded player (bandcamp.com/EmbeddedPlayer/<type>=<id>).

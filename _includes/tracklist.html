@@ -1,0 +1,13 @@
+{%- comment -%}
+  Tracklist for a release. Shown when there's more than one track, or always
+  when include.always is set (release pages). Clicking a track plays it (site.js).
+{%- endcomment -%}
+{%- assign r = include.release -%}
+{%- if r.tracks.size > 1 or include.always %}
+<ol class="tracks">
+  {%- for t in r.tracks %}
+  {%- assign m = t.duration | divided_by: 60 -%}{%- assign s = t.duration | modulo: 60 %}
+  <li><button type="button" data-t="{{ forloop.index }}"{% if forloop.first %} aria-current="true"{% endif %}><span class="tn">{{ forloop.index }}</span><span class="tt">{{ t.title }}</span><span class="td">{{ m }}:{% if s < 10 %}0{% endif %}{{ s }}</span></button></li>
+  {%- endfor %}
+</ol>
+{%- endif -%}

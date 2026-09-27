@@ -1,0 +1,34 @@
+---
+layout: default
+---
+{%- assign releases = site.outputs | sort: "date" | reverse -%}
+{%- for r in releases -%}
+  {%- if r.url == page.url -%}
+    {%- assign i = forloop.index0 -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign newer_i = i | minus: 1 -%}
+{%- assign older_i = i | plus: 1 -%}
+  <header>
+    <a class="name" href="{{ '/' | relative_url }}">{{ site.artist.name }}</a>
+    {% include nav.html %}
+  </header>
+
+  <article class="release" data-release data-autoload data-title="{{ page.title | escape }}" data-bc="{{ page.bandcamp.type }}={{ page.bandcamp.id }}">
+    <img class="cover" src="{{ '/assets/img/800/' | append: page.cover | relative_url }}" width="800" height="800" alt="{{ page.title | escape }} cover art — {{ page.format | downcase }} by {{ site.artist.name }}, {{ page.date | date: '%Y' }}">
+    <h1>{{ page.title }}</h1>
+    <p class="meta m">{{ page.format }} by <a href="{{ '/' | relative_url }}">{{ site.artist.name }}</a> · released <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %B %Y" }}</time></p>
+    <div data-player></div>
+    {% include listen-links.html release=page %}
+    {% include tracklist.html release=page always=true %}
+    {%- assign notes = content | strip -%}
+    {%- if notes != "" %}
+    <div class="notes">{{ content }}</div>
+    {%- endif %}
+  </article>
+
+  <nav aria-label="More releases">
+    <span>{% if i > 0 %}{% assign r = releases[newer_i] %}← <a href="{{ r.url | relative_url }}">{{ r.title }}</a>{% endif %}</span>
+    <a href="{{ '/#outputs' | relative_url }}">All outputs</a>
+    <span>{% if older_i < releases.size %}{% assign r = releases[older_i] %}<a href="{{ r.url | relative_url }}">{{ r.title }}</a> →{% endif %}</span>
+  </nav>
