@@ -1,0 +1,5 @@
+.DS_Store
+*.icloud
+# large audio files belong on Bandcamp/SoundCloud, not in the site repo
+assets/musics/
+__pycache__/

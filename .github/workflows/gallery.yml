@@ -1,0 +1,45 @@
+name: Build photo gallery
+
+# Photos land in photos/ (from the iPhone Shortcut, git, or GitHub's "Upload files"),
+# and this rebuilds the web copies + gallery.json and commits them back.
+on:
+  push:
+    paths:
+      - 'photos/**'
+      - 'scripts/build_gallery.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gallery-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install Pillow pillow-heif
+
+      - run: python3 scripts/build_gallery.py
+
+      - name: Commit gallery changes
+        run: |
+          git add -A assets/gallery gallery.json
+          if git diff --cached --quiet; then
+            echo "Gallery already up to date"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update photo gallery"
+            # more photos may have been uploaded while this ran
+            git pull --rebase
+            git push
+          fi
