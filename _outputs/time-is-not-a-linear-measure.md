@@ -8,7 +8,7 @@ bandcamp:
   id: "27170167"
   url: https://jamesaletsch.bandcamp.com/album/time-is-not-a-linear-measure
 apple: https://music.apple.com/gb/album/time-is-not-a-linear-measure-single/1658330716
-spotify:        # TODO: add the direct Spotify link
+spotify: https://open.spotify.com/album/4lIieERzhotbkiGEeyf0Zl
 tracks:
   - title: "Looking Back to Our Future"
     duration: 240  # seconds
