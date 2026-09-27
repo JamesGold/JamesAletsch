@@ -4,7 +4,7 @@
 
 var ARTIST = {
   name: 'James Aletsch',
-  tagline: 'Music for the dance floor in your head.',
+  tagline: 'Music for the dance floor in your mind.',
   about: 'Electronic music maker and sound shaper. Occasionally challenging, often beautiful. All music, sounds, artwork and photography by James Aletsch.',
   spotify: 'https://open.spotify.com/artist/4aAgOYEZjSrFzIsHcQfAZx',
   apple: 'https://music.apple.com/gb/artist/james-aletsch/1495253560',
