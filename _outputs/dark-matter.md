@@ -8,7 +8,7 @@ bandcamp:
   id: "78072134"
   url: https://jamesaletsch.bandcamp.com/track/dark-matter
 apple: https://music.apple.com/gb/album/dark-matter-single/1767169200
-spotify:        # TODO: add the direct Spotify link
+spotify: https://open.spotify.com/track/6djy2unww3ZUt3Nnajwsg5
 tracks:
   - title: "Dark Matter"
     duration: 344  # seconds
