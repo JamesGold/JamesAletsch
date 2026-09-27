@@ -24,7 +24,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, UnidentifiedImageError
 
 try:  # iPhone photos are HEIC; pillow-heif teaches Pillow to read them
     from pillow_heif import register_heif_opener
@@ -85,8 +85,15 @@ def main():
     originals = sorted(p for p in SRC.iterdir() if p.suffix.lower() in readable)
     skipped = [p.name for p in SRC.iterdir() if p.suffix.lower() in EXTENSIONS - readable]
 
-    entries, keep = [], set()
+    entries, keep, broken = [], set(), []
     for path in originals:
+        # One bad upload (e.g. an empty file from a misconfigured shortcut) mustn't block the rest.
+        try:
+            with Image.open(path) as probe:
+                probe.verify()
+        except (UnidentifiedImageError, OSError, SyntaxError):
+            broken.append(path.name)
+            continue
         digest = hashlib.sha1(path.read_bytes()).hexdigest()[:8]
         name = '{}-{}.jpg'.format(slugify(path.stem), digest)
         with Image.open(path) as img:
@@ -133,6 +140,8 @@ def main():
     MANIFEST.write_text(json.dumps(entries, indent=2) + '\n')
 
     print('gallery.json: {} photos, {} stale files removed'.format(len(entries), removed))
+    if broken:
+        print('WARNING: skipped unreadable files (empty or not an image): ' + ', '.join(broken))
     if skipped:
         print('Skipped (install pillow-heif to read HEIC): ' + ', '.join(skipped))
 
