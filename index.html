@@ -79,7 +79,7 @@
   .thumbs a:hover { opacity: 1; }
   @media (min-width: 560px) { .thumbs { grid-template-columns: repeat(6, 1fr); } } /* 12 covers: even rows at 4 and 6 across */
 
-  /* inspiration: square crops on the same grid as the release covers; the lightbox shows the full frame */
+  /* inputs: square crops on the same grid as the release covers; the lightbox shows the full frame */
   .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   @media (min-width: 560px) { .gallery { grid-template-columns: repeat(6, 1fr); } }
   .g-item { all: unset; cursor: zoom-in; display: block; background: var(--c); }
@@ -109,7 +109,7 @@
 <div class="wrap">
   <header>
     <a class="name" href="./">James Aletsch</a>
-    <nav><a href="#releases">Releases</a><a href="#inspiration">Inspiration</a><a href="#about">About</a></nav>
+    <nav><a href="#outputs">Outputs</a><a href="#inputs">Inputs</a><a href="#about">About</a></nav>
   </header>
 
   <section>
@@ -117,14 +117,14 @@
     <div class="latest" id="latest"></div>
   </section>
 
-  <section id="releases">
-    <h2>Releases <span class="m" id="count"></span></h2>
+  <section id="outputs">
+    <h2>Outputs <span class="m" id="count"></span></h2>
     <div class="thumbs" id="thumbs" aria-hidden="true"></div>
     <ol class="list" id="list"></ol>
   </section>
 
-  <section id="inspiration">
-    <h2>Inspiration <span class="m" id="pcount"></span></h2>
+  <section id="inputs">
+    <h2>Inputs <span class="m" id="pcount"></span></h2>
     <div class="gallery" id="gallery"></div>
   </section>
 
@@ -144,7 +144,7 @@
     <p class="m">There are no advertising cookies or analytics on this website. What you look at is entirely up to you.</p>
   </section>
 
-  <noscript><p>This site needs JavaScript to show releases. Listen on <a href="https://jamesaletsch.bandcamp.com">Bandcamp</a>, <a href="https://music.apple.com/gb/artist/james-aletsch/1495253560">Apple Music</a> or <a href="https://open.spotify.com/artist/4aAgOYEZjSrFzIsHcQfAZx">Spotify</a>.</p></noscript>
+  <noscript><p>This site needs JavaScript to show its outputs. Listen on <a href="https://jamesaletsch.bandcamp.com">Bandcamp</a>, <a href="https://music.apple.com/gb/artist/james-aletsch/1495253560">Apple Music</a> or <a href="https://open.spotify.com/artist/4aAgOYEZjSrFzIsHcQfAZx">Spotify</a>.</p></noscript>
 
   <footer><span>© James Aletsch</span><span id="yr"></span></footer>
 </div>
@@ -200,6 +200,10 @@
   document.getElementById('l1').innerHTML = ARTIST.elsewhere.slice(0, half).map(li).join('');
   document.getElementById('l2').innerHTML = ARTIST.elsewhere.slice(half).map(li).join('');
   document.getElementById('yr').textContent = ARTIST.tagline;
+
+  // Sections were renamed; keep old links (e.g. releases.html → #releases) working.
+  var renamed = { '#releases': '#outputs', '#inspiration': '#inputs' }[location.hash];
+  if (renamed) { history.replaceState(null, '', renamed); document.querySelector(renamed).scrollIntoView(); }
 </script>
 </body>
 </html>
