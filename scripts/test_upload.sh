@@ -40,8 +40,9 @@ put() { # put <repo path> <file to send> <commit message>
   esac
 }
 
-# The shortcut re-encodes to JPEG, so do the same here (sips ships with macOS).
-sips -s format jpeg -Z 2000 "$PHOTO" --out "$TMP/photo.jpg" >/dev/null
+# Originals are visible in the repo, so strip all metadata (GPS, camera, dates)
+# and resize, as the shortcut's "Preserve Metadata: off" does. sips keeps GPS.
+osascript -l JavaScript "$(dirname "$0")/strip_metadata.js" "$PHOTO" "$TMP/photo.jpg" 2000
 put "photos/$NAME.jpg" "$TMP/photo.jpg" "Add photo $NAME"
 
 if [ -n "$CAPTION" ]; then

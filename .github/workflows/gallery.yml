@@ -7,6 +7,7 @@ on:
     paths:
       - 'photos/**'
       - 'scripts/build_gallery.py'
+      - '.github/workflows/gallery.yml'
   workflow_dispatch:
 
 permissions:
@@ -28,18 +29,28 @@ jobs:
 
       - run: pip install Pillow pillow-heif
 
-      - run: python3 scripts/build_gallery.py
-
-      - name: Commit gallery changes
+      # A photo and its caption arrive as separate commits seconds apart, so
+      # another run may push first. The output depends only on photos/, so on a
+      # rejected push we rebuild from the latest branch and try again.
+      - name: Build and commit gallery
         run: |
-          git add -A assets/gallery gallery.json
-          if git diff --cached --quiet; then
-            echo "Gallery already up to date"
-          else
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "Update photo gallery"
-            # more photos may have been uploaded while this ran
-            git pull --rebase
-            git push
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          branch="${GITHUB_REF_NAME}"
+          for attempt in 1 2 3 4 5; do
+            git fetch --quiet origin "$branch"
+            git reset --quiet --hard "origin/$branch"
+            python3 scripts/build_gallery.py
+            git add -A assets/gallery gallery.json
+            if git diff --cached --quiet; then
+              echo "Gallery already up to date"
+              exit 0
+            fi
+            git commit --quiet -m "Update photo gallery"
+            if git push --quiet origin "HEAD:$branch"; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt), rebuilding on latest $branch"
+            sleep $((attempt * 3))
+          done
+          exit 1
