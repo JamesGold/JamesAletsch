@@ -33,7 +33,7 @@ Before building the shortcut, check the token from the Mac:
 scripts/test_upload.sh ~/Desktop/some-photo.jpg "Test caption"
 ```
 
-This makes the same API call as the shortcut. It asks for the token without echoing it, uploads to the `redesign` branch, and explains any error (401 wrong token, 404 wrong repo/branch, 422 already exists). Then check the **Actions** tab for the gallery run and `gallery.json` for the new entry. Delete the test photo from `photos/` afterwards.
+This makes the same API call as the shortcut. It asks for the token without echoing it, uploads to the `master` branch (the live site), and explains any error (401 wrong token, 404 wrong repo/branch, 422 already exists). Then check the **Actions** tab for the gallery run and `gallery.json` for the new entry. Delete the test photo from `photos/` afterwards.
 
 ## 2. The album
 
@@ -59,7 +59,7 @@ Shortcuts → **+** → name it *Post to Website*.
    - URL: `https://api.github.com/repos/JamesGold/JamesAletsch/contents/photos/` + *Formatted Date* + `.jpg`
    - Method **PUT**
    - Headers: `Authorization` = `Bearer <token>` · `Accept` = `application/vnd.github+json` · `X-GitHub-Api-Version` = `2022-11-28`
-   - Request Body **JSON**: `message` = `Add photo ` + *Formatted Date* · `content` = *Base64 Encoded* · `branch` = `redesign` (change to `master` once the redesign is live)
+   - Request Body **JSON**: `message` = `Add photo ` + *Formatted Date* · `content` = *Base64 Encoded* · `branch` = `master`
 7. **Get Dictionary Value** `content` from *Contents of URL* → **If** it has any value → **Add to Variable** `Posted` → **End If**.
 
 **Optional caption (share-sheet runs only)**

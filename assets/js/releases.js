@@ -141,8 +141,11 @@ var RELEASES = [
   }
 ];
 
-// Helpers shared by the concepts
-function coverSrc(r) { return '../assets/img/800/' + r.cover; }
+// Pages outside the site root set SITE_ROOT (e.g. '../') before loading this file.
+var SITE_ROOT = typeof SITE_ROOT === 'string' ? SITE_ROOT : '';
+
+// Helpers shared by the pages
+function coverSrc(r) { return SITE_ROOT + 'assets/img/800/' + r.cover; }
 function year(r) { return r.date.slice(0, 4); }
 function niceDate(r) {
   return new Date(r.date + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });

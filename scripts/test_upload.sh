@@ -5,11 +5,11 @@
 #   scripts/test_upload.sh path/to/photo.jpg ["optional caption"]
 #
 # The token is read from $GITHUB_TOKEN, or asked for without echoing it.
-# Env overrides: REPO (default JamesGold/JamesAletsch), BRANCH (default redesign).
+# Env overrides: REPO (default JamesGold/JamesAletsch), BRANCH (default master).
 set -euo pipefail
 
 REPO="${REPO:-JamesGold/JamesAletsch}"
-BRANCH="${BRANCH:-redesign}"
+BRANCH="${BRANCH:-master}"
 PHOTO="${1:?usage: scripts/test_upload.sh photo.jpg [caption]}"
 CAPTION="${2:-}"
 

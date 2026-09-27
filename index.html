@@ -1,207 +1,205 @@
 <!doctype html>
-
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>James Aletsch</title>
+<meta name="description" content="James Aletsch — electronic music maker and sound shaper. Occasionally challenging, often beautiful. Music for the dance floor in your head.">
+<meta name="author" content="James Aletsch">
+<link rel="canonical" href="https://jamesaletsch.com/">
+<meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jamesaletsch.com/">
+<meta property="og:title" content="James Aletsch">
+<meta property="og:description" content="Electronic music. Music for the dance floor in your head.">
+<meta property="og:image" content="https://jamesaletsch.com/assets/img/800/PETRICHOR.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #fafaf8; --fg: #1a1a1a; --mute: #8a8a86; --line: #e4e4e0; --bc-bg: 'fafaf8'; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #111110; --fg: #e8e8e4; --mute: #7a7a76; --line: #262624; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font: 400 13px/1.6 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+    font-feature-settings: 'tnum', 'ss01'; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); }
+  a:hover { border-color: var(--fg); }
+  img { display: block; width: 100%; height: auto; }
+  .wrap { max-width: 620px; margin: 0 auto; padding: 48px 16px 64px; }
+  @media (min-width: 700px) { .wrap { padding-top: 12vh; } }
 
-  <title>James Aletsch Music</title>
- 
- <meta name="description" content="The Content">
- <meta name="author" content="James Goldsworthy">
+  header { display: flex; justify-content: space-between; margin-bottom: 96px; }
+  header .name { font-weight: 500; border: 0; }
+  header nav { display: flex; gap: 16px; color: var(--mute); }
+  header nav a { border: 0; }
+  header nav a:hover { color: var(--fg); }
 
-<link rel="preconnect" href="https://fonts.gstatic.com"> 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;800&display=swap+SC&family=Roboto&family=Open+Sans:wght@600&display=swap&display=swap" rel="stylesheet">
+  .m { color: var(--mute); }
+  h2 { font-size: 13px; font-weight: 500; margin-bottom: 16px; }
+  section { margin-bottom: 96px; }
 
-<script   src="https://code.jquery.com/jquery-3.5.1.min.js"   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="   crossorigin="anonymous"></script>
+  .latest { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .latest .art { max-width: 280px; }
+  .latest .info { display: grid; gap: 4px; align-content: start; }
+  .latest iframe { width: 100%; height: 42px; border: 0; margin-top: 12px; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; white-space: nowrap; }
+  @media (min-width: 560px) { .latest { grid-template-columns: 200px 1fr; gap: 24px; } }
 
-<script src="assets/js/sitejs.js"></script>  
-<link rel="stylesheet" href="assets/scss/style.css?v=1.0">
+  .list { list-style: none; border-top: 1px solid var(--line); }
+  .list li { border-bottom: 1px solid var(--line); }
+  .list > li > button {
+    all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+    display: grid; grid-template-columns: 3.5em 1fr auto; gap: 12px; padding: 9px 0;
+  }
+  .list > li > button:hover .t, .list li.open .t { text-decoration: underline; text-underline-offset: 3px; }
+  .list > li > button:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
+  .list .more { display: none; padding: 4px 0 20px 3.5em; gap: 16px; grid-template-columns: 96px 1fr; }
+  .list li.open .more { display: grid; }
+  .list .more iframe { width: 100%; height: 42px; border: 0; }
+  .list .more .links { margin-top: 10px; }
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  
+  .tracks { list-style: none; margin-top: 14px; }
+  .tracks button {
+    all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+    display: grid; grid-template-columns: 1.75em 1fr auto; gap: 8px; padding: 3px 0; color: var(--mute);
+  }
+  .tracks button:hover, .tracks button[aria-current] { color: var(--fg); }
+  .tracks button[aria-current] .tt { text-decoration: underline; text-underline-offset: 3px; }
+  .tracks button:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
+
+  .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 24px; }
+  .thumbs a { border: 0; opacity: .9; transition: opacity .2s; }
+  .thumbs a:hover { opacity: 1; }
+  @media (min-width: 560px) { .thumbs { grid-template-columns: repeat(6, 1fr); } } /* 12 covers: even rows at 4 and 6 across */
+
+  /* inspiration: square crops on the same grid as the release covers; the lightbox shows the full frame */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  @media (min-width: 560px) { .gallery { grid-template-columns: repeat(6, 1fr); } }
+  .g-item { all: unset; cursor: zoom-in; display: block; background: var(--c); }
+  .g-item img { aspect-ratio: 1; object-fit: cover; transition: opacity .2s; }
+  .g-item:hover img { opacity: .85; }
+  .g-item:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
+
+  .lb { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: grid; place-items: center; padding: 48px 16px; }
+  .lb-fig { display: grid; gap: 10px; justify-items: center; max-width: 100%; max-height: 100%; }
+  .lb-img { width: auto; max-width: min(100%, 1200px); max-height: calc(100svh - 120px); object-fit: contain; transition: opacity .2s; }
+  .lb-img.loading { opacity: .3; }
+  .lb-cap, .lb-count { color: var(--mute); }
+  .lb-count { position: fixed; top: 16px; left: 16px; }
+  .lb-btn { all: unset; cursor: pointer; position: fixed; color: var(--mute); padding: 8px 12px; font-size: 15px; }
+  .lb-btn:hover, .lb-btn:focus-visible { color: var(--fg); }
+  .lb-close { top: 8px; right: 8px; font-size: 20px; }
+  .lb-prev { left: 4px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 4px; top: 50%; transform: translateY(-50%); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .cols ul { list-style: none; }
+  p + p { margin-top: 12px; }
+  footer { color: var(--mute); display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 12px; }
+</style>
 </head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="name" href="./">James Aletsch</a>
+    <nav><a href="#releases">Releases</a><a href="#inspiration">Inspiration</a><a href="#about">About</a></nav>
+  </header>
 
-<body>	
-	<nav class="main-nav" id="MainNav">
-		<div class="title"><h1>James Aletsch</h1></div>
-		<ul id="navContent">
-			<li><a href="index.html">Home</a></li>
-			<li><a href="releases.html">Releases</a></li>
+  <section>
+    <h2>Latest</h2>
+    <div class="latest" id="latest"></div>
+  </section>
 
-		</ul>
-		
-		<div class="fullburger" id="navclick">
-			<span class="burger"></span>	
-			<span class="burger"></span>	
-			<span class="burger"></span>
-		</div>		
-	</nav>
-	
-	<header>
-		<div class="hero">
-			<h1>James Aletsch<br />Are We Still</h1>
-		</div>
-			<a href="https://jamesaletsch.com/releases.html">
-				<h2>Debut Album. Out Now</h2>
-			</a>
-	</header>
-	
-	
-	<main>
-		<!-- <section class="offer">
-			<div class="imgarea"><img src="assets/img/BUTTER.jpg"></div>
-			<div class="offertext">
-				<h1>BUTTER</h1>
-				<h3>Released: 08/10/21</h3>
-				<p></p>
-			</div>	
-			
-		</section>	
-				
-		<section class="offer">
-			<div class="imgarea"><img src="assets/img/LOSTDANCEFLOOR.jpg"></div>
-			<div class="offertext">
-				<h1>Lost Dance Floor</h1>
-				<h3>Released: 21/02/21</h3>
-				<p>"...James Aletsch goes full dance floor in what feels like a natural follow up to 2020 single Cult Berlin"</p>
-			</div>	
-			
-		</section>	 -->
-				
-	
-		
-		<section class="callout">
-			<h1>James Aletsch - Are We Still</h1>
-			<p>Occasionally challenging, often beautiful. Music for the dance floor in your head. <br />Stream to the album:</p>
-			<div class="buttongroup">
-<a href="https://open.spotify.com/album/28ayzU5PQptASEiqRcnk0U?si=1XWEAkDsRhKFLqAgyVvpkQ"><h3>SPOTIFY</h3></a><a href="https://music.apple.com/us/album/are-we-still/1523120228"><h3>APPLE MUSIC</h3></a></div>
-		</section>
+  <section id="releases">
+    <h2>Releases <span class="m" id="count"></span></h2>
+    <div class="thumbs" id="thumbs" aria-hidden="true"></div>
+    <ol class="list" id="list"></ol>
+  </section>
 
+  <section id="inspiration">
+    <h2>Inspiration <span class="m" id="pcount"></span></h2>
+    <div class="gallery" id="gallery"></div>
+  </section>
 
-		
-		<section class="slide-section">
-			<div class="slide-section-title"><h1>Discography</h1></div>
-			<div class="slide-group">
-			
-				<div class="slide-item">
-					<h1>Further</h1>
-					<p>Debut Digital EP</p>
-					<img src="assets/img/FURTHER.jpg" alt="sketch1">
-				</div>	
+  <section id="about">
+    <h2>About</h2>
+    <p>Electronic music maker and sound shaper. Occasionally challenging, often beautiful — music for the dance floor in your head.</p>
+    <p class="m">All music, sounds, artwork and photography by James Aletsch.</p>
+  </section>
 
-				<div class="slide-item">
-					<h1>Aero</h1>
-					<p>Digital single</p>
-					<img src="assets/img/AERO.jpg" alt="sketch1">
-				</div>	
+  <section id="links">
+    <h2>Links</h2>
+    <div class="cols"><ul id="l1"></ul><ul id="l2"></ul></div>
+  </section>
 
-				<div class="slide-item">
-					<h1>Melodica</h1>
-					<p>Digital single</p>
-					<img src="assets/img/MELODICA.jpg" alt="sketch1">
-				</div>					
+  <section>
+    <h2>Privacy</h2>
+    <p class="m">There are no advertising cookies or analytics on this website. What you look at is entirely up to you.</p>
+  </section>
 
-				<div class="slide-item">
-					<h1>Kommen</h1>
-					<p>Digital single</p>
-					<img src="assets/img/KOMMEN.jpg" alt="sketch1">
-				</div>	
+  <noscript><p>This site needs JavaScript to show releases. Listen on <a href="https://jamesaletsch.bandcamp.com">Bandcamp</a>, <a href="https://music.apple.com/gb/artist/james-aletsch/1495253560">Apple Music</a> or <a href="https://open.spotify.com/artist/4aAgOYEZjSrFzIsHcQfAZx">Spotify</a>.</p></noscript>
 
-				<div class="slide-item">
-					<h1>Are We Still</h1>
-					<p>Digital album</p>
-					<img src="assets/img/AREWESTILL.jpg" alt="sketch1">
-				</div>	
-				
-				<div class="slide-item">
-					<h1>Lost Dance Floor</h1>
-					<p>Digital single</p>
-					<img src="assets/img/LOSTDANCEFLOOR.jpg" alt="sketch1">
-				</div>					
+  <footer><span>© James Aletsch</span><span id="yr"></span></footer>
+</div>
 
-				<div class="slide-item">
-					<h1>Butter</h1>
-					<p>Digital single</p>
-					<img src="assets/img/BUTTER.jpg" alt="sketch1">
-				</div>	
-				
-				<div class="slide-item">
-					<h1>Dusk</h1>
-					<p>Digital EP</p>
-					<img src="assets/img/DUSK.jpg" alt="sketch1">
-				</div>	
-				
-				<div class="slide-item">
-					<h1>Decision Overload /Alone</h1>
-					<p>Digital single</p>
-					<img src="assets/img/DecisionOverloadAlone.jpg" alt="sketch1">
-				</div>	
-															
-			</div><!-- END SLIDE GROUP-->
-			
-						<a href="releases.html"><h3>Go to releases</h3></a>
+<script src="assets/js/releases.js"></script>
+<script src="assets/js/gallery.js"></script>
+<script>
+  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  var bcOpts = { size: 'small', bg: dark ? '111110' : 'fafaf8', link: dark ? 'e8e8e4' : '1a1a1a' };
+  var embed = function (r) {
+    return '<iframe loading="lazy" title="' + esc(r.title) + ' on Bandcamp" src="' + bandcampEmbed(r, bcOpts) + '"></iframe>';
+  };
+  var links = function (r) {
+    return '<div class="links">' + listenLinks(r).map(function (l) {
+      return '<a href="' + l.url + '" target="_blank" rel="noopener">' + l.label + '</a>';
+    }).join('') + '</div>';
+  };
 
-		</section>	
-		
-		
-		
-<!--
-		<section class="alt">
+  var r0 = RELEASES[0];
+  document.getElementById('latest').innerHTML =
+    '<div class="art"><img src="' + coverSrc(r0) + '" alt="' + esc(r0.title) + ' cover art"></div>' +
+    '<div class="info" data-release><span>' + esc(r0.title) + '</span><span class="m">' + r0.format + ', ' + niceDate(r0) + '</span>' +
+    embed(r0) + links(r0) + tracklist(r0) + '</div>';
 
-			<div class="textarea alttext">
-				<h1>Sunday.<br />As it should be</h1>
-				<h3>Our amazing roasts</h3>
-				<p>Mr Bezos, 57, has led Amazon since its start as an online bookshop in 1994. The firm now employs 1.3 million people globally, and saw its already explosive growth skyrocket last year, as the pandemic prompted a surge in online shopping</p>		
-			</div>	
-			<div class="imgarea"></div>
+  document.getElementById('count').textContent = RELEASES.length;
+  document.getElementById('list').innerHTML = RELEASES.map(function (r) {
+    return '<li id="' + r.slug + '"><button aria-expanded="false"><span class="m">' + year(r) + '</span><span class="t">' + esc(r.title) +
+      '</span><span class="m">' + r.format + '</span></button><div class="more"><img loading="lazy" src="' + coverSrc(r) + '" alt="">' +
+      '<div data-release><div data-p></div>' + links(r) + tracklist(r) + '</div></div></li>';
+  }).join('');
+  document.addEventListener('click', function (e) { handleTrackClick(e, '[data-release]', bcOpts); });
+  document.getElementById('list').addEventListener('click', function (e) {
+    var b = e.target.closest('.list > li > button'); if (!b) return;
+    var li = b.parentNode, open = li.classList.toggle('open');
+    b.setAttribute('aria-expanded', open);
+    var p = li.querySelector('[data-p]');
+    if (open && !p.innerHTML) p.innerHTML = embed(RELEASES.find(function (r) { return r.slug === li.id; }));
+  });
 
-		</section>	
--->		
-		
-	
-	
-	</main>	
-	
-	
-	
-	
-<footer>
-	
-	<div class="footerarea">
-	<h3>Music for your library:</h3>
-	<p><a href="https://open.spotify.com/artist/4aAgOYEZjSrFzIsHcQfAZx?si=XyxAusX2T9azUZhBjCRoVg" target="_blank">James Aletsch on Spotify</a></p>
-		<p><a href="https://music.apple.com/artist/james-aletsch/1495253560" target="_blank">James Aletsch on Apple Music</a></p>
-		<p><a href="https://www.deezer.com/en/artist/83409122" target="_blank">James Aletsch on Deezer</a></p>
-		<p><a href="https://music.amazon.co.uk/artists/B083ZDS95K/james-aletsch" target="_blank">James Aletsch on Amazon Music</a></p>
-		<p><a href="https://jamesaletsch.bandcamp.com" target="_blank">James Aletsch on Bandcamp</a></p>
-	</div>	
+  document.getElementById('thumbs').innerHTML = RELEASES.slice(1).map(function (r) {
+    return '<a href="#' + r.slug + '" tabindex="-1"><img loading="lazy" src="' + coverSrc(r) + '" alt=""></a>';
+  }).join('');
+  document.getElementById('thumbs').addEventListener('click', function (e) {
+    var a = e.target.closest('a'); if (!a) return;
+    var btn = document.querySelector(a.getAttribute('href') + ' button');
+    if (!btn.parentNode.classList.contains('open')) btn.click();
+  });
 
-	<div class="footerarea">
-	<h3>Thought control:</h3>
-		<p><a href="https://www.instagram.com/jamesaletsch/" target="_blank">James Aletsch on Instagram</a></p>
-		<p><a href="https://twitter.com/JAletsch" target="_blank">James Aletsch on Twitter</a></p>
-	</div>	
-	
-	<div class="footerarea">
-	<h3>Other places</h3>
-		<p><a href="https://www.discogs.com/artist/8007127-James-Aletsch" target="_blank">James Aletsch on Discogs</a></p>
-		<p><a href="https://www.youtube.com/channel/UC3zdemA0dFnrOscTuxaa2MA" target="_blank">James Aletsch on YouTube</a></p>
-		<p><a href="https://soundcloud.com/user-363998037" target="_blank">James Aletsch on SoundCloud</a></p>
+  loadGallery(document.getElementById('gallery')).then(function (p) { document.getElementById('pcount').textContent = p.length || ''; });
 
-	</div>	
-	
-	<div class="footerarea">	
-	<h3>Privacy:</h3>
-	<p>There are no advertising cookies or analytics tracking on this website. <br />We believe that what you look at is entirely up to you. Browse freely, friends</p>	
-	</div>			
-
-
-</footer>		
-
-
+  var half = Math.ceil(ARTIST.elsewhere.length / 2);
+  var li = function (l) { return '<li><a href="' + l.url + '" target="_blank" rel="noopener">' + l.label + '</a></li>'; };
+  document.getElementById('l1').innerHTML = ARTIST.elsewhere.slice(0, half).map(li).join('');
+  document.getElementById('l2').innerHTML = ARTIST.elsewhere.slice(half).map(li).join('');
+  document.getElementById('yr').textContent = ARTIST.tagline;
+</script>
 </body>
 </html>
-

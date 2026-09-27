@@ -2,7 +2,7 @@
 // renders it into a page-supplied container, with a keyboard/swipe lightbox.
 // Pages style .gallery, .g-item and .lb (lightbox) however they like.
 
-var SITE_ROOT = '../'; // concepts live one level down; becomes '' on the real site
+var SITE_ROOT = typeof SITE_ROOT === 'string' ? SITE_ROOT : ''; // set by pages outside the site root
 
 function loadGallery(el, opts) {
   opts = opts || {};

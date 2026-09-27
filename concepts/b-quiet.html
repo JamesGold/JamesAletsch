@@ -137,8 +137,9 @@
   <footer><span>© James Aletsch</span><span id="yr"></span></footer>
 </div>
 
-<script src="releases.js"></script>
-<script src="gallery.js"></script>
+<script>var SITE_ROOT = '../';</script>
+<script src="../assets/js/releases.js"></script>
+<script src="../assets/js/gallery.js"></script>
 <script>
   var dark = matchMedia('(prefers-color-scheme: dark)').matches;
   var bcOpts = { size: 'small', bg: dark ? '111110' : 'fafaf8', link: dark ? 'e8e8e4' : '1a1a1a' };
