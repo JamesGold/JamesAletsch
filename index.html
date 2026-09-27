@@ -109,7 +109,7 @@
 <div class="wrap">
   <header>
     <a class="name" href="./">James Aletsch</a>
-    <nav><a href="#outputs">Outputs</a><a href="#inputs">Inputs</a><a href="#about">About</a></nav>
+    <nav><a href="#outputs">Outputs</a><a href="#inputs">Inputs</a><a href="#data">Data</a></nav>
   </header>
 
   <section>
@@ -128,8 +128,8 @@
     <div class="gallery" id="gallery"></div>
   </section>
 
-  <section id="about">
-    <h2>About</h2>
+  <section id="data">
+    <h2>Data</h2>
     <p>Electronic music maker and sound shaper. Occasionally challenging, often beautiful — music for the dance floor in your head.</p>
     <p class="m">All music, sounds, artwork and photography by James Aletsch.</p>
   </section>
@@ -202,7 +202,7 @@
   document.getElementById('yr').textContent = ARTIST.tagline;
 
   // Sections were renamed; keep old links (e.g. releases.html → #releases) working.
-  var renamed = { '#releases': '#outputs', '#inspiration': '#inputs' }[location.hash];
+  var renamed = { '#releases': '#outputs', '#inspiration': '#inputs', '#about': '#data' }[location.hash];
   if (renamed) { history.replaceState(null, '', renamed); document.querySelector(renamed).scrollIntoView(); }
 </script>
 </body>
