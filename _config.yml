@@ -1,0 +1,8 @@
+# GitHub Pages (Jekyll) settings.
+# Keep the full-size originals and build tooling off the public website;
+# only the metadata-stripped copies in assets/gallery/ are published.
+exclude:
+  - photos
+  - scripts
+  - config.codekit3
+  - README.md

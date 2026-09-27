@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>James Aletsch — Concept B: Quiet</title>
+<meta name="description" content="James Aletsch — electronic music. Music for the dance floor in your head.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #fafaf8; --fg: #1a1a1a; --mute: #8a8a86; --line: #e4e4e0; --bc-bg: 'fafaf8'; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #111110; --fg: #e8e8e4; --mute: #7a7a76; --line: #262624; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font: 400 13px/1.6 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+    font-feature-settings: 'tnum', 'ss01'; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); }
+  a:hover { border-color: var(--fg); }
+  img { display: block; width: 100%; height: auto; }
+  .wrap { max-width: 620px; margin: 0 auto; padding: 48px 16px 64px; }
+  @media (min-width: 700px) { .wrap { padding-top: 12vh; } }
+
+  header { display: flex; justify-content: space-between; margin-bottom: 96px; }
+  header .name { font-weight: 500; border: 0; }
+  header nav { display: flex; gap: 16px; color: var(--mute); }
+  header nav a { border: 0; }
+  header nav a:hover { color: var(--fg); }
+
+  .m { color: var(--mute); }
+  h2 { font-size: 13px; font-weight: 500; margin-bottom: 16px; }
+  section { margin-bottom: 96px; }
+
+  .latest { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .latest .art { max-width: 280px; }
+  .latest .info { display: grid; gap: 4px; align-content: start; }
+  .latest iframe { width: 100%; height: 42px; border: 0; margin-top: 12px; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; white-space: nowrap; }
+  @media (min-width: 560px) { .latest { grid-template-columns: 200px 1fr; gap: 24px; } }
+
+  .list { list-style: none; border-top: 1px solid var(--line); }
+  .list li { border-bottom: 1px solid var(--line); }
+  .list > li > button {
+    all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+    display: grid; grid-template-columns: 3.5em 1fr auto; gap: 12px; padding: 9px 0;
+  }
+  .list > li > button:hover .t, .list li.open .t { text-decoration: underline; text-underline-offset: 3px; }
+  .list > li > button:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
+  .list .more { display: none; padding: 4px 0 20px 3.5em; gap: 16px; grid-template-columns: 96px 1fr; }
+  .list li.open .more { display: grid; }
+  .list .more iframe { width: 100%; height: 42px; border: 0; }
+  .list .more .links { margin-top: 10px; }
+
+  .tracks { list-style: none; margin-top: 14px; }
+  .tracks button {
+    all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+    display: grid; grid-template-columns: 1.75em 1fr auto; gap: 8px; padding: 3px 0; color: var(--mute);
+  }
+  .tracks button:hover, .tracks button[aria-current] { color: var(--fg); }
+  .tracks button[aria-current] .tt { text-decoration: underline; text-underline-offset: 3px; }
+  .tracks button:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
+
+  .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 24px; }
+  .thumbs a { border: 0; opacity: .9; transition: opacity .2s; }
+  .thumbs a:hover { opacity: 1; }
+  @media (min-width: 560px) { .thumbs { grid-template-columns: repeat(6, 1fr); } } /* 12 covers: even rows at 4 and 6 across */
+
+  /* inspiration: square crops on the same grid as the release covers; the lightbox shows the full frame */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  @media (min-width: 560px) { .gallery { grid-template-columns: repeat(6, 1fr); } }
+  .g-item { all: unset; cursor: zoom-in; display: block; background: var(--c); }
+  .g-item img { aspect-ratio: 1; object-fit: cover; transition: opacity .2s; }
+  .g-item:hover img { opacity: .85; }
+  .g-item:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
+
+  .lb { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: grid; place-items: center; padding: 48px 16px; }
+  .lb-fig { display: grid; gap: 10px; justify-items: center; max-width: 100%; max-height: 100%; }
+  .lb-img { width: auto; max-width: min(100%, 1200px); max-height: calc(100svh - 120px); object-fit: contain; transition: opacity .2s; }
+  .lb-img.loading { opacity: .3; }
+  .lb-cap, .lb-count { color: var(--mute); }
+  .lb-count { position: fixed; top: 16px; left: 16px; }
+  .lb-btn { all: unset; cursor: pointer; position: fixed; color: var(--mute); padding: 8px 12px; font-size: 15px; }
+  .lb-btn:hover, .lb-btn:focus-visible { color: var(--fg); }
+  .lb-close { top: 8px; right: 8px; font-size: 20px; }
+  .lb-prev { left: 4px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 4px; top: 50%; transform: translateY(-50%); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .cols ul { list-style: none; }
+  p + p { margin-top: 12px; }
+  footer { color: var(--mute); display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="name" href="#">James Aletsch</a>
+    <nav><a href="#releases">Releases</a><a href="#inspiration">Inspiration</a><a href="#about">About</a></nav>
+  </header>
+
+  <section>
+    <h2>Latest</h2>
+    <div class="latest" id="latest"></div>
+  </section>
+
+  <section id="releases">
+    <h2>Releases <span class="m" id="count"></span></h2>
+    <div class="thumbs" id="thumbs" aria-hidden="true"></div>
+    <ol class="list" id="list"></ol>
+  </section>
+
+  <section id="inspiration">
+    <h2>Inspiration <span class="m" id="pcount"></span></h2>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>Electronic music maker and sound shaper. Occasionally challenging, often beautiful — music for the dance floor in your head.</p>
+    <p class="m">All music, sounds, artwork and photography by James Aletsch.</p>
+  </section>
+
+  <section id="links">
+    <h2>Links</h2>
+    <div class="cols"><ul id="l1"></ul><ul id="l2"></ul></div>
+  </section>
+
+  <section>
+    <h2>Privacy</h2>
+    <p class="m">There are no advertising cookies or analytics on this website. What you look at is entirely up to you.</p>
+  </section>
+
+  <footer><span>© James Aletsch</span><span id="yr"></span></footer>
+</div>
+
+<script src="releases.js"></script>
+<script src="gallery.js"></script>
+<script>
+  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  var bcOpts = { size: 'small', bg: dark ? '111110' : 'fafaf8', link: dark ? 'e8e8e4' : '1a1a1a' };
+  var embed = function (r) {
+    return '<iframe loading="lazy" title="' + esc(r.title) + ' on Bandcamp" src="' + bandcampEmbed(r, bcOpts) + '"></iframe>';
+  };
+  var links = function (r) {
+    return '<div class="links">' + listenLinks(r).map(function (l) {
+      return '<a href="' + l.url + '" target="_blank" rel="noopener">' + l.label + '</a>';
+    }).join('') + '</div>';
+  };
+
+  var r0 = RELEASES[0];
+  document.getElementById('latest').innerHTML =
+    '<div class="art"><img src="' + coverSrc(r0) + '" alt="' + esc(r0.title) + ' cover art"></div>' +
+    '<div class="info" data-release><span>' + esc(r0.title) + '</span><span class="m">' + r0.format + ', ' + niceDate(r0) + '</span>' +
+    embed(r0) + links(r0) + tracklist(r0) + '</div>';
+
+  document.getElementById('count').textContent = RELEASES.length;
+  document.getElementById('list').innerHTML = RELEASES.map(function (r) {
+    return '<li id="' + r.slug + '"><button aria-expanded="false"><span class="m">' + year(r) + '</span><span class="t">' + esc(r.title) +
+      '</span><span class="m">' + r.format + '</span></button><div class="more"><img loading="lazy" src="' + coverSrc(r) + '" alt="">' +
+      '<div data-release><div data-p></div>' + links(r) + tracklist(r) + '</div></div></li>';
+  }).join('');
+  document.addEventListener('click', function (e) { handleTrackClick(e, '[data-release]', bcOpts); });
+  document.getElementById('list').addEventListener('click', function (e) {
+    var b = e.target.closest('.list > li > button'); if (!b) return;
+    var li = b.parentNode, open = li.classList.toggle('open');
+    b.setAttribute('aria-expanded', open);
+    var p = li.querySelector('[data-p]');
+    if (open && !p.innerHTML) p.innerHTML = embed(RELEASES.find(function (r) { return r.slug === li.id; }));
+  });
+
+  document.getElementById('thumbs').innerHTML = RELEASES.slice(1).map(function (r) {
+    return '<a href="#' + r.slug + '" tabindex="-1"><img loading="lazy" src="' + coverSrc(r) + '" alt=""></a>';
+  }).join('');
+  document.getElementById('thumbs').addEventListener('click', function (e) {
+    var a = e.target.closest('a'); if (!a) return;
+    var btn = document.querySelector(a.getAttribute('href') + ' button');
+    if (!btn.parentNode.classList.contains('open')) btn.click();
+  });
+
+  loadGallery(document.getElementById('gallery')).then(function (p) { document.getElementById('pcount').textContent = p.length || ''; });
+
+  var half = Math.ceil(ARTIST.elsewhere.length / 2);
+  var li = function (l) { return '<li><a href="' + l.url + '" target="_blank" rel="noopener">' + l.label + '</a></li>'; };
+  document.getElementById('l1').innerHTML = ARTIST.elsewhere.slice(0, half).map(li).join('');
+  document.getElementById('l2').innerHTML = ARTIST.elsewhere.slice(half).map(li).join('');
+  document.getElementById('yr').textContent = ARTIST.tagline;
+</script>
+</body>
+</html>

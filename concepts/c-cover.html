@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>James Aletsch — Concept C: Cover</title>
+<meta name="description" content="James Aletsch — electronic music. Music for the dance floor in your head.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --tint: #3c3c3c; --fg: #f2f2f0; --mute: rgba(242,242,240,.6); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0b0b0b; color: var(--fg); font: 400 15px/1.5 'Montserrat', 'Helvetica Neue', sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { display: block; width: 100%; height: auto; }
+
+  /* ---------- stage ---------- */
+  .stage { position: relative; min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); overflow: hidden; }
+  .bg { position: absolute; inset: 0; z-index: 0; background: var(--tint); transition: background .8s; }
+  .bg img {
+    position: absolute; inset: -10%; width: 120%; height: 120%; object-fit: cover;
+    filter: blur(60px) saturate(1.3) brightness(.55); transform: scale(1.1); transition: opacity .8s;
+  }
+  .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.1) 40%, rgba(0,0,0,.75)); }
+
+  .top { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 20px clamp(16px, 4vw, 48px); }
+  .top .name { font-weight: 300; letter-spacing: .35em; text-transform: uppercase; font-size: 13px; text-decoration: none; }
+  .top nav { display: flex; gap: 20px; font-size: 12px; letter-spacing: .15em; text-transform: uppercase; }
+  .top nav a { text-decoration: none; color: var(--mute); }
+  .top nav a:hover { color: var(--fg); }
+
+  .feature {
+    position: relative; z-index: 2; display: grid; gap: clamp(20px, 4vw, 56px);
+    padding: 12px clamp(16px, 4vw, 48px) 32px; align-items: center; justify-items: center;
+  }
+  .cover { width: min(86vw, 62svh, 640px); box-shadow: 0 40px 80px -20px rgba(0,0,0,.7); transition: opacity .35s, transform .35s; }
+  .cover.swap { opacity: 0; transform: scale(.98); }
+  .info { width: min(86vw, 440px); display: grid; gap: 14px; transition: opacity .35s; }
+  .info.swap { opacity: 0; }
+  .info .kick { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--mute); }
+  .info h1 { font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: clamp(28px, 4vw, 48px); line-height: 1; }
+  .info iframe { width: 100%; height: 120px; border: 0; }
+  .tracks { list-style: none; border-top: 1px solid rgba(255,255,255,.18); max-height: 40svh; overflow-y: auto; }
+  .tracks li { border-bottom: 1px solid rgba(255,255,255,.12); }
+  .tracks button {
+    all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+    display: grid; grid-template-columns: 2em 1fr auto; gap: 8px; padding: 9px 2px;
+    font-size: 13px; color: var(--mute); transition: color .2s, background .2s;
+  }
+  .tracks .tn, .tracks .td { font-size: 11px; letter-spacing: .1em; font-variant-numeric: tabular-nums; }
+  .tracks button:hover { color: var(--fg); background: rgba(255,255,255,.06); }
+  .tracks button[aria-current] { color: var(--fg); font-weight: 500; }
+  .tracks button[aria-current] .tn { font-size: 0; } /* swap the number for a play mark */
+  .tracks button[aria-current] .tn::before { content: '▶'; font-size: 9px; }
+  .tracks button:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .links a {
+    text-decoration: none; font-size: 11px; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+    padding: 10px 14px; border: 1px solid rgba(255,255,255,.35); backdrop-filter: blur(6px);
+  }
+  .links a:hover { background: var(--fg); color: #0b0b0b; border-color: var(--fg); }
+  @media (min-width: 900px) {
+    .feature { grid-template-columns: auto 440px; justify-content: center; }
+    .info { width: 100%; }
+  }
+
+  /* ---------- strip ---------- */
+  .strip { position: relative; z-index: 2; padding: 0 0 20px; }
+  .strip p { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--mute); padding: 0 clamp(16px, 4vw, 48px) 10px; }
+  .rail { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 clamp(16px, 4vw, 48px) 8px; scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail button {
+    all: unset; cursor: pointer; flex: 0 0 auto; width: 84px; scroll-snap-align: start;
+    opacity: .45; transition: opacity .25s, transform .25s; position: relative;
+  }
+  .rail button:hover { opacity: .85; }
+  .rail button[aria-current="true"] { opacity: 1; transform: translateY(-4px); }
+  .rail button[aria-current="true"]::after { content: ''; position: absolute; left: 0; right: 0; bottom: -8px; height: 2px; background: var(--fg); }
+  .rail button:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+  @media (min-width: 900px) { .rail button { width: 104px; } }
+
+  /* ---------- inspiration: square crops; the lightbox shows the full frame ---------- */
+  .photos { background: #0b0b0b; padding: clamp(48px, 8vw, 120px) clamp(16px, 4vw, 48px) 0; }
+  .photos h2 { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--mute); font-weight: 500; margin-bottom: 24px; }
+  .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  @media (min-width: 700px) { .gallery { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+  @media (min-width: 1200px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+  .g-item { all: unset; cursor: zoom-in; display: block; position: relative; background: var(--c); overflow: hidden; }
+  .g-item img { aspect-ratio: 1; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1), opacity .3s; }
+  .g-item:hover img { transform: scale(1.03); }
+  .g-cap {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 24px 12px 10px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    background: linear-gradient(transparent, rgba(0,0,0,.7)); opacity: 0; transition: opacity .3s;
+  }
+  .g-item:hover .g-cap, .g-item:focus-visible .g-cap { opacity: 1; }
+  .g-item:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+  .lb {
+    position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 56px 16px;
+    background: color-mix(in srgb, var(--c) 25%, #050505); transition: background .6s;
+  }
+  .lb-fig { display: grid; gap: 14px; justify-items: center; max-width: 100%; max-height: 100%; }
+  .lb-img { width: auto; max-width: min(100%, 1600px); max-height: calc(100svh - 140px); object-fit: contain; box-shadow: 0 30px 80px -20px rgba(0,0,0,.8); transition: opacity .3s; }
+  .lb-img.loading { opacity: .2; }
+  .lb-cap { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); }
+  .lb-count { position: fixed; top: 22px; left: clamp(16px, 4vw, 48px); font-size: 11px; letter-spacing: .25em; color: var(--mute); }
+  .lb-btn { all: unset; cursor: pointer; position: fixed; color: var(--mute); padding: 10px 14px; font-size: 20px; transition: color .2s; }
+  .lb-btn:hover, .lb-btn:focus-visible { color: var(--fg); }
+  .lb-close { top: 10px; right: clamp(8px, 4vw, 40px); font-size: 26px; }
+  .lb-prev { left: clamp(4px, 2vw, 24px); top: 50%; transform: translateY(-50%); }
+  .lb-next { right: clamp(4px, 2vw, 24px); top: 50%; transform: translateY(-50%); }
+  @media (max-width: 600px) { .lb-prev, .lb-next { top: auto; bottom: 12px; transform: none; } }
+
+  /* ---------- below the fold ---------- */
+  .lower { background: #0b0b0b; padding: clamp(48px, 8vw, 120px) clamp(16px, 4vw, 48px); display: grid; gap: 48px; }
+  .lower h2 { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--mute); font-weight: 500; margin-bottom: 16px; }
+  .about p { font-weight: 300; font-size: clamp(20px, 2.6vw, 32px); line-height: 1.35; max-width: 28ch; }
+  .lower ul { list-style: none; columns: 2; gap: 24px; }
+  .lower li a { text-decoration: none; line-height: 2; color: var(--mute); }
+  .lower li a:hover { color: var(--fg); }
+  .lower .priv { color: var(--mute); max-width: 42ch; font-size: 13px; }
+  @media (min-width: 900px) { .lower { grid-template-columns: 2fr 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="bg" id="bg"><img id="bgimg" alt=""></div>
+
+  <header class="top">
+    <a class="name" href="#">James Aletsch</a>
+    <nav><a href="#inspiration">Inspiration</a><a href="#about">About</a></nav>
+  </header>
+
+  <main class="feature">
+    <img class="cover" id="cover" alt="">
+    <div class="info" id="info"></div>
+  </main>
+
+  <div class="strip">
+    <p>Discography — <span id="pos"></span></p>
+    <div class="rail" id="rail" role="tablist" aria-label="Releases"></div>
+  </div>
+</div>
+
+<section class="photos" id="inspiration">
+  <h2>Inspiration</h2>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<section class="lower">
+  <div class="about" id="about"><h2>About</h2><p>Electronic music maker and sound shaper. Occasionally challenging, often beautiful. Music for the dance floor in your head.</p></div>
+  <div id="links"><h2>Listen &amp; follow</h2><ul id="ul"></ul></div>
+  <div><h2>Privacy</h2><p class="priv">No advertising cookies or analytics tracking on this website. What you look at is entirely up to you. Browse freely, friends.</p></div>
+</section>
+
+<script src="releases.js"></script>
+<script src="gallery.js"></script>
+<script>
+  var rail = document.getElementById('rail'), cover = document.getElementById('cover'), info = document.getElementById('info');
+  var bg = document.getElementById('bg'), bgimg = document.getElementById('bgimg');
+  var current = -1;
+  var bcOpts = { bg: '333333', link: 'ffffff' };
+  info.addEventListener('click', function (e) { handleTrackClick(e, '.info', bcOpts); });
+
+  rail.innerHTML = RELEASES.map(function (r, i) {
+    return '<button role="tab" data-i="' + i + '" aria-label="' + esc(r.title) + '"><img loading="lazy" src="' + coverSrc(r) + '" alt=""></button>';
+  }).join('');
+
+  function show(i, push) {
+    if (i === current) return;
+    current = i;
+    var r = RELEASES[i];
+    cover.classList.add('swap'); info.classList.add('swap');
+    setTimeout(function () {
+      cover.src = coverSrc(r); cover.alt = r.title + ' cover art';
+      bgimg.src = coverSrc(r); bg.style.background = r.colour;
+      info.innerHTML =
+        '<span class="kick">' + (i === 0 ? 'Latest · ' : '') + r.format + ' · ' + niceDate(r) + '</span>' +
+        '<h1>' + esc(r.title) + '</h1>' +
+        '<iframe title="' + esc(r.title) + ' on Bandcamp" src="' + bandcampEmbed(r, bcOpts) + '"></iframe>' +
+        tracklist(r) +
+        '<div class="links">' + listenLinks(r).map(function (l) {
+          return '<a href="' + l.url + '" target="_blank" rel="noopener">' + l.label + '</a>';
+        }).join('') + '</div>';
+      cover.onload = function () { cover.classList.remove('swap'); info.classList.remove('swap'); };
+    }, cover.getAttribute('src') ? 300 : 0);
+
+    [].forEach.call(rail.children, function (b, j) { b.setAttribute('aria-current', j === i); b.setAttribute('aria-selected', j === i); });
+    var b = rail.children[i];
+    rail.scrollTo({ left: b.offsetLeft - (rail.clientWidth - b.offsetWidth) / 2, behavior: 'smooth' });
+    document.getElementById('pos').textContent = (i + 1) + ' / ' + RELEASES.length;
+    if (push) history.replaceState(null, '', '#' + r.slug);
+  }
+
+  rail.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) show(+b.dataset.i, true); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') show(Math.min(current + 1, RELEASES.length - 1), true);
+    if (e.key === 'ArrowLeft') show(Math.max(current - 1, 0), true);
+  });
+
+  var start = RELEASES.findIndex(function (r) { return '#' + r.slug === location.hash; });
+  show(start < 0 ? 0 : start, false);
+
+  loadGallery(document.getElementById('gallery'), { captions: true });
+
+  document.getElementById('ul').innerHTML = ARTIST.elsewhere.map(function (l) {
+    return '<li><a href="' + l.url + '" target="_blank" rel="noopener">' + l.label + '</a></li>';
+  }).join('');
+</script>
+</body>
+</html>

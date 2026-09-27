@@ -190,36 +190,36 @@
       "sC" : 3,
       "tS" : 0
     },
-    "\/assets\/musics\/.Intermelodica.mp3.icloud" : {
+    "\/assets\/musics\/Intermelodica.mp3" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/assets\/musics\/.Intermelodica.mp3.icloud",
+      "oAP" : "\/assets\/musics\/Intermelodica.mp3",
       "oF" : 0
     },
-    "\/assets\/musics\/.LiveJam-TR8sEr1NordTD3.mp3.icloud" : {
+    "\/assets\/musics\/LiveJam-TR8sEr1NordTD3.mp3" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/assets\/musics\/.LiveJam-TR8sEr1NordTD3.mp3.icloud",
+      "oAP" : "\/assets\/musics\/LiveJam-TR8sEr1NordTD3.mp3",
       "oF" : 0
     },
-    "\/assets\/musics\/.LogicalPositivists-Balanced-Low.mp3.icloud" : {
+    "\/assets\/musics\/LogicalPositivists-Balanced-Low.mp3" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/assets\/musics\/.LogicalPositivists-Balanced-Low.mp3.icloud",
+      "oAP" : "\/assets\/musics\/LogicalPositivists-Balanced-Low.mp3",
       "oF" : 0
     },
-    "\/assets\/musics\/.Prework-Remix-II-Balanced-Low.mp3.icloud" : {
+    "\/assets\/musics\/Prework-Remix-II-Balanced-Low.mp3" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/assets\/musics\/.Prework-Remix-II-Balanced-Low.mp3.icloud",
+      "oAP" : "\/assets\/musics\/Prework-Remix-II-Balanced-Low.mp3",
       "oF" : 0
     },
     "\/assets\/scss\/_colours.scss" : {
