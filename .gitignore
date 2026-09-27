@@ -3,3 +3,5 @@
 # large audio files belong on Bandcamp/SoundCloud, not in the site repo
 assets/musics/
 __pycache__/
+# local working screenshots (may show tokens)
+screenshots/
