@@ -71,7 +71,11 @@ section { margin-bottom: 96px; }
 @media (min-width: 560px) { .gallery { grid-template-columns: repeat(6, 1fr); } }
 .g-item { all: unset; cursor: zoom-in; display: block; background: var(--c); }
 .g-item img { aspect-ratio: 1; object-fit: cover; transition: opacity .2s; }
-.g-item:hover img { opacity: .85; }
+/* desktop (mouse or trackpad): Inputs photos faded 60% until hovered; touch screens show them at full strength */
+@media (hover: hover) and (pointer: fine) {
+  #inputs .g-item { opacity: .4; transition: opacity .25s; }
+  #inputs .g-item:hover, #inputs .g-item:focus-visible { opacity: 1; }
+}
 .g-item:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
 
 .lb { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: grid; place-items: center; padding: 48px 16px; }
