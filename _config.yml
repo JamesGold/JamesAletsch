@@ -42,8 +42,5 @@ exclude:
   - scripts
   - concepts
   - screenshots
-  - IGNORE
-  - build
-  - config.codekit3
   - README.md
   - GALLERY.md
