@@ -16,7 +16,13 @@ img { display: block; width: 100%; height: auto; }
 .wrap { max-width: 620px; margin: 0 auto; padding: 48px 16px 64px; }
 @media (min-width: 700px) { .wrap { padding-top: 12vh; } }
 
-header { display: flex; justify-content: space-between; margin-bottom: 96px; }
+/* header stays pinned to the top while scrolling */
+header {
+  display: flex; justify-content: space-between; margin: -16px 0 80px; padding: 16px 0;
+  position: sticky; top: 0; z-index: 50; background: var(--bg);
+}
+/* keep headings visible below the pinned header when jumping to a section or release */
+[id] { scroll-margin-top: 64px; }
 header .name { font-weight: 500; border: 0; }
 header nav { display: flex; gap: 16px; color: var(--mute); }
 header nav a { border: 0; }
@@ -105,4 +111,5 @@ header h1 a { border: 0; }
 .hero { margin: 0 0 96px; }
 .hero a { display: block; border: 0; cursor: zoom-in; }
 .hero img { aspect-ratio: auto; max-height: 75svh; object-fit: cover; }
+.hero noscript img { display: block; }
 .hero figcaption { margin-top: 8px; }

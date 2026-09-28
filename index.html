@@ -10,14 +10,31 @@ gallery: true
     {% include nav.html %}
   </header>
 
-  {%- comment -%} Hero: the newest photo by date taken (the gallery is sorted newest first) {%- endcomment -%}
+  {%- comment -%}
+    Hero: a random Inputs photo on every load, picked by the inline script before the
+    image starts downloading. Without JavaScript (and for search engines) it's the newest.
+  {%- endcomment -%}
   {%- assign hero = site.data.gallery | first -%}
   {%- if hero %}
-  <figure class="hero">
-    <a href="#inputs" data-photo="{{ hero.id }}"><img src="{{ hero.full | prepend: '/' | relative_url }}" srcset="{{ hero.thumb | prepend: '/' | relative_url }} 800w, {{ hero.full | prepend: '/' | relative_url }} 2000w" sizes="(max-width: 652px) calc(100vw - 32px), 620px" width="{{ hero.width }}" height="{{ hero.height }}" alt="{{ hero.alt | escape }}" fetchpriority="high" style="background: {{ hero.colour }}"></a>
-    {%- if hero.caption != "" %}
-    <figcaption class="m">{{ hero.caption }}</figcaption>
-    {%- endif %}
+  {%- assign root = "/" | relative_url %}
+  <figure class="hero" id="hero">
+    <a href="#inputs" data-photo="{{ hero.id }}"><img alt="" fetchpriority="high"></a>
+    <figcaption class="m" hidden></figcaption>
+    <script>
+      (function () {
+        // [id, thumb, full, width, height, alt, caption, colour]
+        var photos = [{% for p in site.data.gallery %}[{{ p.id | jsonify }},{{ p.thumb | jsonify }},{{ p.full | jsonify }},{{ p.width }},{{ p.height }},{{ p.alt | jsonify }},{{ p.caption | jsonify }},{{ p.colour | jsonify }}]{% unless forloop.last %},{% endunless %}{% endfor %}];
+        var p = photos[Math.floor(Math.random() * photos.length)], root = {{ root | jsonify }};
+        var fig = document.getElementById('hero'), img = fig.querySelector('img'), cap = fig.querySelector('figcaption');
+        fig.querySelector('a').dataset.photo = p[0];
+        img.width = p[3]; img.height = p[4]; img.alt = p[5]; img.style.background = p[7];
+        img.sizes = '(max-width: 652px) calc(100vw - 32px), 620px';
+        img.srcset = root + p[1] + ' 800w, ' + root + p[2] + ' 2000w';
+        img.src = root + p[2];
+        if (p[6]) { cap.textContent = p[6]; cap.hidden = false; }
+      })();
+    </script>
+    <noscript><img src="{{ hero.full | prepend: '/' | relative_url }}" width="{{ hero.width }}" height="{{ hero.height }}" alt="{{ hero.alt | escape }}" style="background: {{ hero.colour }}"></noscript>
   </figure>
   {%- endif %}
 
