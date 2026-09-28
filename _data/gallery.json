@@ -603,5 +603,49 @@
     "caption": "",
     "alt": "Photograph by James Aletsch",
     "colour": "#2e2f2f"
+  },
+  {
+    "id": "2022-08-07-080157-938",
+    "thumb": "assets/gallery/thumb/2022-08-07-080157-938-e77027a6.jpg",
+    "full": "assets/gallery/full/2022-08-07-080157-938-e77027a6.jpg",
+    "width": 1715,
+    "height": 2000,
+    "date": "2022-08-07",
+    "caption": "",
+    "alt": "Photograph by James Aletsch",
+    "colour": "#80858e"
+  },
+  {
+    "id": "2022-06-14-203829-314",
+    "thumb": "assets/gallery/thumb/2022-06-14-203829-314-8bb7c93c.jpg",
+    "full": "assets/gallery/full/2022-06-14-203829-314-8bb7c93c.jpg",
+    "width": 2000,
+    "height": 2000,
+    "date": "2022-06-14",
+    "caption": "",
+    "alt": "Photograph by James Aletsch",
+    "colour": "#70574b"
+  },
+  {
+    "id": "2022-05-14-190302-723",
+    "thumb": "assets/gallery/thumb/2022-05-14-190302-723-e8b9e416.jpg",
+    "full": "assets/gallery/full/2022-05-14-190302-723-e8b9e416.jpg",
+    "width": 2000,
+    "height": 2000,
+    "date": "2022-05-14",
+    "caption": "",
+    "alt": "Photograph by James Aletsch",
+    "colour": "#4c5049"
+  },
+  {
+    "id": "2022-04-30-113130-406",
+    "thumb": "assets/gallery/thumb/2022-04-30-113130-406-918e1428.jpg",
+    "full": "assets/gallery/full/2022-04-30-113130-406-918e1428.jpg",
+    "width": 2000,
+    "height": 2000,
+    "date": "2022-04-30",
+    "caption": "",
+    "alt": "Photograph by James Aletsch",
+    "colour": "#a98c65"
   }
 ]
