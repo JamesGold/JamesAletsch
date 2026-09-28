@@ -21,17 +21,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
       - run: pip install Pillow pillow-heif
 
-      # A photo and its caption arrive as separate commits seconds apart, so
-      # another run may push first. The output depends only on photos/, so on a
-      # rejected push we rebuild from the latest branch and try again.
+      # Photos (and captions) arrive as separate commits seconds apart, so another
+      # run may push first. The output depends only on photos/, so on a rejected
+      # push we rebuild from the latest branch and try again. If newer photos have
+      # arrived meanwhile, their own run is already queued and will include ours,
+      # so this run can stop without failing.
       - name: Build and commit gallery
         run: |
           git config user.name "github-actions[bot]"
@@ -40,6 +42,7 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch --quiet origin "$branch"
             git reset --quiet --hard "origin/$branch"
+            built=$(git log -1 --format=%H -- photos scripts/build_gallery.py)
             python3 scripts/build_gallery.py
             git add -A assets/gallery gallery.json _data/gallery.json
             if git diff --cached --quiet; then
@@ -48,6 +51,11 @@ jobs:
             fi
             git commit --quiet -m "Update photo gallery"
             if git push --quiet origin "HEAD:$branch"; then
+              exit 0
+            fi
+            git fetch --quiet origin "$branch"
+            if [ "$(git log -1 --format=%H "origin/$branch" -- photos scripts/build_gallery.py)" != "$built" ]; then
+              echo "Newer photos arrived while building; their run will update the gallery"
               exit 0
             fi
             echo "Push rejected (attempt $attempt), rebuilding on latest $branch"
