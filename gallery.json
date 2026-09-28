@@ -440,6 +440,17 @@
     "colour": "#383631"
   },
   {
+    "id": "2025-08-04-184825-577",
+    "thumb": "assets/gallery/thumb/2025-08-04-184825-577-babbb814.jpg",
+    "full": "assets/gallery/full/2025-08-04-184825-577-babbb814.jpg",
+    "width": 1500,
+    "height": 2000,
+    "date": "2025-08-04",
+    "caption": "",
+    "alt": "Photograph by James Aletsch",
+    "colour": "#1b1d25"
+  },
+  {
     "id": "2025-06-15-201633-165",
     "thumb": "assets/gallery/thumb/2025-06-15-201633-165-d073bbcd.jpg",
     "full": "assets/gallery/full/2025-06-15-201633-165-d073bbcd.jpg",
@@ -460,6 +471,17 @@
     "caption": "",
     "alt": "Photograph by James Aletsch",
     "colour": "#675a48"
+  },
+  {
+    "id": "2025-04-17-182715-427",
+    "thumb": "assets/gallery/thumb/2025-04-17-182715-427-4a818f6f.jpg",
+    "full": "assets/gallery/full/2025-04-17-182715-427-4a818f6f.jpg",
+    "width": 2000,
+    "height": 1173,
+    "date": "2025-04-17",
+    "caption": "",
+    "alt": "Photograph by James Aletsch",
+    "colour": "#686868"
   },
   {
     "id": "2025-04-15-081725-000",
