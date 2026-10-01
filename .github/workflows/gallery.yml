@@ -2,11 +2,15 @@ name: Build photo gallery
 
 # Photos land in photos/ (from the iPhone Shortcut, git, or GitHub's "Upload files"),
 # and this rebuilds the web copies + gallery.json and commits them back.
+# Album runs of the Shortcut also upload sync/album-<time>.txt (the names of every
+# photo in the Website album); photos no longer in the album are removed first.
 on:
   push:
     paths:
       - 'photos/**'
+      - 'sync/album-*.txt'
       - 'scripts/build_gallery.py'
+      - 'scripts/apply_album_sync.py'
       - '.github/workflows/gallery.yml'
   workflow_dispatch:
 
@@ -20,6 +24,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # While true, album lists only produce sync/report.txt ("would remove …").
+      # Set to "false" once a report has been checked.
+      ALBUM_SYNC_DRY_RUN: "true"
     steps:
       - uses: actions/checkout@v5
 
@@ -30,11 +38,11 @@ jobs:
       - run: pip install Pillow pillow-heif
 
       # Photos (and captions) arrive as separate commits seconds apart, so another
-      # run may push first. The output depends only on photos/, so on a rejected
-      # push we rebuild from the latest branch and try again. If newer photos have
-      # arrived meanwhile, their own run is already queued and will include ours,
-      # so this run can stop without failing.
-      - name: Build and commit gallery
+      # run may push first. The output depends only on photos/ and sync/, so on a
+      # rejected push we rebuild from the latest branch and try again. If newer
+      # uploads have arrived meanwhile, their own run is already queued and will
+      # include ours, so this run can stop without failing.
+      - name: Apply album sync, build and commit gallery
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -42,20 +50,26 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch --quiet origin "$branch"
             git reset --quiet --hard "origin/$branch"
-            built=$(git log -1 --format=%H -- photos scripts/build_gallery.py)
+            built=$(git log -1 --format=%H -- photos sync scripts)
+            sync_status=0
+            summary=$(python3 scripts/apply_album_sync.py) || sync_status=$?
+            if [ "$sync_status" -ne 0 ] && [ "$sync_status" -ne 2 ]; then exit 1; fi
+            [ -f sync/report.txt ] && cat sync/report.txt >> "$GITHUB_STEP_SUMMARY"
             python3 scripts/build_gallery.py
-            git add -A assets/gallery gallery.json _data/gallery.json
+            git add -A photos sync assets/gallery gallery.json _data/gallery.json
             if git diff --cached --quiet; then
               echo "Gallery already up to date"
               exit 0
             fi
-            git commit --quiet -m "Update photo gallery"
+            git commit --quiet -m "${summary:-Update photo gallery}"
             if git push --quiet origin "HEAD:$branch"; then
+              # A refused album sync (safety check) is committed as a report, then flagged red
+              [ "$sync_status" -eq 2 ] && exit 1
               exit 0
             fi
             git fetch --quiet origin "$branch"
-            if [ "$(git log -1 --format=%H "origin/$branch" -- photos scripts/build_gallery.py)" != "$built" ]; then
-              echo "Newer photos arrived while building; their run will update the gallery"
+            if [ "$(git log -1 --format=%H "origin/$branch" -- photos sync scripts)" != "$built" ]; then
+              echo "Newer uploads arrived while building; their run will update the gallery"
               exit 0
             fi
             echo "Push rejected (attempt $attempt), rebuilding on latest $branch"

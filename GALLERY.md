@@ -13,7 +13,8 @@ iPhone "Website" album
 
 - **Adding a photo:** upload to `photos/` (shortcut, `git push`, or GitHub's *Add file → Upload files*).
 - **Captions:** a `.txt` with the same name as the photo, or an entry in `photos/captions.json` (which can also set alt text).
-- **Removing a photo:** delete it from `photos/` on GitHub. The Action removes its web copies. Removing it from the iPhone album does *not* take it down.
+- **Removing a photo:** remove it from the **Website** album. The next album run of the shortcut (the daily automation, or running it from the Shortcuts app) uploads the album's list of names, and the Action removes any photo that's no longer in the album, with its web copies and caption. Deleting a photo from `photos/` on GitHub also works, but if it's still in the album the next run puts it back.
+- **The Website album is the source of truth.** Photos posted from the share sheet are added to the album first, so the sync never removes them. Photos uploaded any other way (test script, GitHub's Upload files) are removed at the next sync unless they're also in the album.
 - **Order:** newest first, by the date the photo was taken (EXIF), falling back to the date at the start of the filename.
 - `photos/` and `scripts/` are excluded from the published site in `_config.yml`. Only the metadata-stripped copies are public on jamesaletsch.com. The originals are still visible in the GitHub repo itself if it's public, which is why the shortcut strips metadata before uploading.
 
@@ -48,6 +49,7 @@ In **Settings → Apps → Shortcuts**, set new shortcuts to open in the **edito
 ```
 Receive Images from Share Sheet            (if there's no input: Continue)
 If  Shortcut Input  has any value
+    Add  Shortcut Input  to album  Website               (keeps the album the source of truth)
     Set variable Photos → Shortcut Input                 (share-sheet run)
 Otherwise
     Find Photos where Album is Website                   (no limit)
@@ -59,6 +61,8 @@ Combine  Contents of URL  with New Lines
 Set variable Posted → Combined Text       (every file name already on the site)
 Repeat with each item in  Photos
     Format  🔁 Repeat Item › Date Created        Custom: yyyy-MM-dd-HHmmss-SSS
+    Text  [Formatted Date].jpg
+    Add  Text  to variable InAlbum                (every photo, posted or not)
     URL  https://api.github.com/repos/JamesGold/JamesAletsch/contents/photos/[Formatted Date].jpg
     If  Posted  does not contain  [Formatted Date].jpg
         Resize  Repeat Item  to 2000 × Auto Height
@@ -68,6 +72,14 @@ Repeat with each item in  Photos
     Otherwise                                      (already posted: skip)
     End If
 End Repeat
+If  Shortcut Input  does not have any value          (album runs only, never the share sheet)
+    Combine  InAlbum  with New Lines
+    Encode  Combined Text  with base64            (Line Breaks: None)
+    Format  Current Date                          Custom: yyyy-MM-dd-HHmmss-SSS
+    Get contents of  https://api.github.com/repos/JamesGold/JamesAletsch/contents/sync/album-[Formatted Date].txt
+                                          PUT, 3 headers, JSON body: message = Album sync,
+                                          content = Base64 Encoded, branch = master
+End If
 Show notification  Posted to Website
 ```
 
@@ -80,6 +92,9 @@ Why it's built this way:
 - **One list request per run** (a few KB of names), not one check per photo. Checking each photo individually downloaded the photo itself and timed out on big albums.
 - **Preserve Metadata: off** is what strips the GPS location before anything leaves the phone.
 - GitHub rejects uploading to a name that already exists ("sha wasn't supplied", 422), so a mistake can't overwrite or duplicate a photo.
+- **Removals happen on GitHub, not the phone** (`scripts/apply_album_sync.py`, run by the Action). The album list only goes up on album runs: a share-sheet run only knows the photos you shared, not the whole album. Safety checks: nothing is removed if the list is empty, or if it would remove more than half the photos. A refused sync turns the Action run red and explains why in `sync/report.txt`. Every removal can be undone from git history.
+- **Time zones:** file names use the phone's time zone. Abroad, names shift by hours, so album runs would re-upload everything under new names (and the sync would refuse to remove the old ones). Turn the daily automation off while travelling, or only use the share sheet.
+- `sync/report.txt` always shows the last sync: how many photos were in the album, on the site, and what was removed. While `ALBUM_SYNC_DRY_RUN` is `"true"` in `.github/workflows/gallery.yml`, it only reports what *would* be removed.
 
 ### Troubleshooting (things that went wrong while building it)
 

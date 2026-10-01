@@ -39,6 +39,7 @@ defaults:
 # The design concepts stay in the repo for reference but aren't published.
 exclude:
   - photos
+  - sync
   - scripts
   - concepts
   - screenshots
