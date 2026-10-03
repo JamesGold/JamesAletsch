@@ -1,7 +1,7 @@
-Album sync 2026-10-03 11:41 UTC
-Album list: album-2026-10-03-124052-022.txt (109 photos)
+Album sync 2026-10-03 11:45 UTC
+Album list: album-2026-10-03-124531-967.txt (109 photos)
 On the site: 116 photos
-DRY RUN, nothing removed. Would remove 7:
+Removed 7:
   2022-06-14-203829-314.jpg
   2022-08-11-175846-361.jpg
   2023-05-14-151438-000.jpg
