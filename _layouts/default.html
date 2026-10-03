@@ -8,9 +8,9 @@
 {{ content }}
   <footer><span>© {{ site.artist.name }}</span><span>{{ site.artist.tagline }}</span></footer>
 </div>
-<script src="{{ '/assets/js/site.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 {%- if page.gallery %}
-<script src="{{ '/assets/js/gallery.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/gallery.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <script>
   loadGallery(document.getElementById('gallery')).then(function (photos) {
     var count = document.getElementById('pcount');
