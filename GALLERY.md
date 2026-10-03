@@ -86,7 +86,7 @@ Why it's built this way:
 - GitHub rejects uploading to a name that already exists ("sha wasn't supplied", 422), so a mistake can't overwrite or duplicate a photo.
 - **Removals happen on GitHub, not the phone** (`scripts/apply_album_sync.py`, run by the Action). Every run uploads the album's list of names. Safety checks: nothing is removed if the list is empty, or if it would remove more than half the photos. A refused sync turns the Action run red and explains why in `sync/report.txt`. Every removal can be undone from git history.
 - **Time zones:** file names use the phone's time zone. Abroad, names shift by hours, so album runs would re-upload everything under new names (and the sync would refuse to remove the old ones). Turn the daily automation off while travelling.
-- `sync/report.txt` always shows the last sync: how many photos were in the album, on the site, and what was removed. While `ALBUM_SYNC_DRY_RUN` is `"true"` in `.github/workflows/gallery.yml`, it only reports what *would* be removed.
+- `sync/report.txt` always shows the last sync: how many photos were in the album, on the site, and what was removed. Removals are live (`ALBUM_SYNC_DRY_RUN: "false"` in `.github/workflows/gallery.yml`); set it to `"true"` to go back to only reporting what *would* be removed.
 
 ### Troubleshooting (things that went wrong while building it)
 

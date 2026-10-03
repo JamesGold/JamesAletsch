@@ -25,9 +25,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # While true, album lists only produce sync/report.txt ("would remove …").
-      # Set to "false" once a report has been checked.
-      ALBUM_SYNC_DRY_RUN: "true"
+      # "false": photos no longer in the Website album are removed.
+      # Set to "true" to only report what would be removed (sync/report.txt).
+      ALBUM_SYNC_DRY_RUN: "false"
     steps:
       - uses: actions/checkout@v5
 
