@@ -1,4 +1,7 @@
-Album sync 2026-10-03 13:53 UTC
-Album list: album-2026-10-03-145313-358.txt (109 photos)
+Album sync 2026-10-03 18:05 UTC
+Album list: album-2026-10-03-190504-254.txt (106 photos)
 On the site: 109 photos
-Removed 0:
+Removed 3:
+  2023-08-30-172141-801.jpg
+  2023-09-14-180721-755.jpg
+  2025-04-08-083159-263.jpg
