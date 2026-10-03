@@ -78,8 +78,9 @@ gallery: true
   </section>
 
   <section id="inputs">
-    <h2>Inputs <span class="m" id="pcount"></span></h2>
-    <div class="gallery" id="gallery"></div>
+    <h2>Inputs <span class="m" id="pcount">{{ site.data.gallery.size }}</span></h2>
+    <div class="preview">{% include photo-grid.html limit=18 %}</div>
+    <p class="view-all"><a href="{{ '/inputs/' | relative_url }}">View all</a></p>
   </section>
 
   <section id="data">

@@ -13,7 +13,8 @@
 <script src="{{ '/assets/js/gallery.js' | relative_url }}"></script>
 <script>
   loadGallery(document.getElementById('gallery')).then(function (photos) {
-    document.getElementById('pcount').textContent = photos.length || '';
+    var count = document.getElementById('pcount');
+    if (count && photos.length) count.textContent = photos.length;
     // The hero photo opens in the same viewer as the Inputs grid
     var hero = document.querySelector('[data-photo]');
     if (hero) hero.addEventListener('click', function (e) {

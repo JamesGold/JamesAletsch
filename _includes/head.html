@@ -11,9 +11,17 @@
   {%- assign og_type = "music.album" -%}
 {%- else -%}
   {%- assign latest = site.outputs | sort: "date" | last -%}
-  {%- assign page_title = site.title -%}
-  {%- assign page_desc = site.description -%}
-  {%- assign page_image = "/assets/img/800/" | append: latest.cover -%}
+  {%- if page.title -%}
+    {%- capture page_title -%}{{ page.title }} — {{ site.artist.name }}{%- endcapture -%}
+  {%- else -%}
+    {%- assign page_title = site.title -%}
+  {%- endif -%}
+  {%- assign page_desc = page.description | default: site.description -%}
+  {%- if page.gallery_image and site.data.gallery.size > 0 -%}
+    {%- assign page_image = site.data.gallery.first.full | prepend: "/" -%}
+  {%- else -%}
+    {%- assign page_image = "/assets/img/800/" | append: latest.cover -%}
+  {%- endif -%}
   {%- assign og_type = "website" -%}
 {%- endif %}
 <meta charset="utf-8">

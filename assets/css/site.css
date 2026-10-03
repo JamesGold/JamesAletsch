@@ -73,10 +73,27 @@ section { margin-bottom: 96px; }
 .g-item img { aspect-ratio: 1; object-fit: cover; transition: opacity .2s; }
 /* desktop (mouse or trackpad): Inputs photos faded 60% until hovered; touch screens show them at full strength */
 @media (hover: hover) and (pointer: fine) {
-  #inputs .g-item { opacity: .4; transition: opacity .25s; }
-  #inputs .g-item:hover, #inputs .g-item:focus-visible { opacity: 1; }
+  .gallery .g-item { opacity: .4; transition: opacity .25s; }
+  .gallery .g-item:hover, .gallery .g-item:focus-visible { opacity: 1; }
 }
 .g-item:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
+
+/* homepage Inputs preview: two full rows, the third fading into the page, then "View all".
+   Tile size comes from the section's width (container units), so it holds at any width. */
+#inputs { container-type: inline-size; }
+.preview .gallery {
+  --cols: 4;
+  --tile: calc((100cqw - (var(--cols) - 1) * 8px) / var(--cols));
+  max-height: calc(2.6 * var(--tile) + 16px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - .6 * var(--tile)), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - .6 * var(--tile)), transparent);
+}
+@media (min-width: 560px) { .preview .gallery { --cols: 6; } }
+.view-all { text-align: right; margin-top: 20px; }
+
+/* /inputs/ page */
+.inputs-page h1 { font-size: 13px; font-weight: 500; margin-bottom: 16px; }
 
 .lb { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: grid; place-items: center; padding: 48px 16px; }
 .lb-fig { display: grid; gap: 10px; justify-items: center; max-width: 100%; max-height: 100%; }

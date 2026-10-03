@@ -2,7 +2,7 @@
 // renders it into a page-supplied container, with a keyboard/swipe lightbox.
 // Pages style .gallery, .g-item and .lb (lightbox) however they like.
 
-var SITE_ROOT = typeof SITE_ROOT === 'string' ? SITE_ROOT : ''; // set by pages outside the site root
+var SITE_ROOT = typeof SITE_ROOT === 'string' ? SITE_ROOT : '/'; // site root; the design concepts set '../'
 
 function esc(s) {
   return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
@@ -14,6 +14,19 @@ function loadGallery(el, opts) {
     .then(function (res) { return res.ok ? res.json() : []; })
     .catch(function () { return []; })
     .then(function (photos) {
+      if (el.hasAttribute('data-static')) {
+        // Tiles are already in the page (built by Jekyll): add the photo viewer, browsing all
+        // photos. Matched by id in case the page and gallery.json come from different builds.
+        // Without the list the tiles stay plain links to the full-size photos.
+        if (photos.length) el.addEventListener('click', function (e) {
+          var a = e.target.closest('.g-item'); if (!a) return;
+          var i = photos.findIndex(function (p) { return p.id === a.dataset.id; });
+          if (i < 0) return;
+          e.preventDefault();
+          openLightbox(photos, i, a);
+        });
+        return photos;
+      }
       if (opts.limit) photos = photos.slice(0, opts.limit);
       if (!photos.length) { el.closest('section').hidden = true; return photos; }
       el.innerHTML = photos.map(function (p, i) {

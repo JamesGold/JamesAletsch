@@ -1,0 +1,11 @@
+{%- comment -%}
+  Inputs photo grid, newest first, from _data/gallery.json (written by scripts/build_gallery.py).
+  include.limit: show only the first n (the homepage preview). Each tile links to the full-size
+  photo; gallery.js opens it in the photo viewer instead, browsing all photos.
+{%- endcomment -%}
+{%- assign limit = include.limit | default: 100000 %}
+<div class="gallery" id="gallery" data-static>
+  {%- for p in site.data.gallery limit: limit %}
+  <a class="g-item" href="{{ p.full | prepend: '/' | relative_url }}" data-id="{{ p.id }}" data-i="{{ forloop.index0 }}" style="--c: {{ p.colour }}"><img loading="lazy" src="{{ p.thumb | prepend: '/' | relative_url }}" width="{{ p.width }}" height="{{ p.height }}" alt="{{ p.alt | escape }}"></a>
+  {%- endfor %}
+</div>

@@ -12,7 +12,7 @@ Source for [jamesaletsch.com](https://jamesaletsch.com), built by GitHub Pages (
 
 ## Layout
 
-- `index.html`: homepage; `_layouts/output.html`: each release's page
+- `index.html`: homepage; `_layouts/output.html`: each release's page; `inputs.html`: all photos at /inputs/
 - `_includes/`: shared pieces (page head, structured data, links, tracklist, nav)
 - `_config.yml`: site title/description, artist profile links
 - `assets/css/site.css`, `assets/js/site.js`: styles and players

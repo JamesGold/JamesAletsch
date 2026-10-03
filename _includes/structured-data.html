@@ -32,6 +32,23 @@
   ],
   "sameAs": [{{ page.bandcamp.url | jsonify }}{% if page.apple %}, {{ page.apple | jsonify }}{% endif %}{% if page.spotify %}, {{ page.spotify | jsonify }}{% endif %}]
 }
+{%- elsif page.url == "/inputs/" %}
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "@id": {{ page.url | absolute_url | append: "#gallery" | jsonify }},
+  "name": "Inputs",
+  "url": {{ page.url | absolute_url | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "isPartOf": {"@id": {{ "/#website" | absolute_url | jsonify }}},
+  "author": {{ artist_ref }},
+  "numberOfItems": {{ site.data.gallery.size }},
+  "associatedMedia": [
+    {%- for p in site.data.gallery %}
+    {"@type": "ImageObject", "contentUrl": {{ p.full | prepend: "/" | absolute_url | jsonify }}, "thumbnailUrl": {{ p.thumb | prepend: "/" | absolute_url | jsonify }}, "width": {{ p.width }}, "height": {{ p.height }}{% if p.caption != "" %}, "caption": {{ p.caption | jsonify }}{% endif %}{% if p.date %}, "dateCreated": {{ p.date | jsonify }}{% endif %}, "creator": {"@id": {{ artist_id | jsonify }}}}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
 {%- else %}
 {%- assign releases = site.outputs | sort: "date" | reverse -%}
 {%- assign latest = releases.first %}

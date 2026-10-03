@@ -1,0 +1,17 @@
+---
+layout: default
+title: Inputs
+description: Photographs by James Aletsch, newest first.
+permalink: /inputs/
+gallery: true
+gallery_image: true
+---
+  <header>
+    <a class="name" href="{{ '/' | relative_url }}">{{ site.artist.name }}</a>
+    {% include nav.html %}
+  </header>
+
+  <section class="inputs-page">
+    <h1>Inputs <span class="m" id="pcount">{{ site.data.gallery.size }}</span></h1>
+    {% include photo-grid.html %}
+  </section>

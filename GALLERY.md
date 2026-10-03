@@ -8,7 +8,8 @@ iPhone "Website" album
     → photos/2026-09-25-143012-123.jpg  (named by date taken; optional .txt caption)
       → GitHub Action "Build photo gallery" (scripts/build_gallery.py)
         → assets/gallery/{thumb,full}/…jpg  + gallery.json (+ _data/gallery.json for Jekyll)
-          → GitHub Pages rebuilds: newest photo is the homepage hero, all appear under Inputs
+          → GitHub Pages rebuilds: a random photo is the homepage hero, the newest 18 preview under
+            Inputs on the homepage, and all of them are at jamesaletsch.com/inputs/
 ```
 
 - **Adding a photo:** upload to `photos/` (shortcut, `git push`, or GitHub's *Add file → Upload files*).
