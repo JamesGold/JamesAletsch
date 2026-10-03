@@ -85,7 +85,7 @@ Why it's built this way:
 - **Preserve Metadata: off** is what strips the GPS location before anything leaves the phone.
 - GitHub rejects uploading to a name that already exists ("sha wasn't supplied", 422), so a mistake can't overwrite or duplicate a photo.
 - **Removals happen on GitHub, not the phone** (`scripts/apply_album_sync.py`, run by the Action). Every run uploads the album's list of names. Safety checks: nothing is removed if the list is empty, or if it would remove more than half the photos. A refused sync turns the Action run red and explains why in `sync/report.txt`. Every removal can be undone from git history.
-- **Time zones:** file names use the phone's time zone. Abroad, names shift by hours, so album runs would re-upload everything under new names (and the sync would refuse to remove the old ones). Don't run the shortcut while your phone is in another time zone.
+- **Time zones:** file names use the phone's time zone. Running the shortcut in another time zone works, but every name shifts by a few hours, so the first run there re-uploads the whole album under the new names and the sync then removes the old copies. No photos are lost. The same happens again when you're back home. That's roughly 100–200 MB of uploads each time, so use Wi-Fi. If a run stops partway through uploading, the sync may refuse to remove the old copies until a later run has finished; just run it again.
 - `sync/report.txt` always shows the last sync: how many photos were in the album, on the site, and what was removed. Removals are live (`ALBUM_SYNC_DRY_RUN: "false"` in `.github/workflows/gallery.yml`); set it to `"true"` to go back to only reporting what *would* be removed.
 
 ### Troubleshooting (things that went wrong while building it)
