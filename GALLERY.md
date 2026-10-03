@@ -13,8 +13,8 @@ iPhone "Website" album
 
 - **Adding a photo:** upload to `photos/` (shortcut, `git push`, or GitHub's *Add file → Upload files*).
 - **Captions:** a `.txt` with the same name as the photo, or an entry in `photos/captions.json` (which can also set alt text).
-- **Removing a photo:** remove it from the **Website** album. The next album run of the shortcut (the daily automation, or running it from the Shortcuts app) uploads the album's list of names, and the Action removes any photo that's no longer in the album, with its web copies and caption. Deleting a photo from `photos/` on GitHub also works, but if it's still in the album the next run puts it back.
-- **The Website album is the source of truth, and the only way in.** To post photos, select them in Photos → **Share** → **Add to Album** → **Website** (the Photos app's own option, which doesn't duplicate anything), then run the shortcut or wait for the automation. iOS Shortcuts has no action that adds an existing photo to an album (*Save to Photos* saves a new copy), so the shortcut is no longer in the share sheet: anything it posted from there wouldn't be in the album, and the next sync would remove it. Photos uploaded any other way (test script, GitHub's Upload files) are removed at the next sync unless they're also in the album.
+- **Removing a photo:** remove it from the **Website** album. The next run of the shortcut uploads the album's list of names, and the Action removes any photo that's no longer in the album, with its web copies and caption. Deleting a photo from `photos/` on GitHub also works, but if it's still in the album the next run puts it back.
+- **The Website album is the source of truth, and the only way in.** To post photos, select them in Photos → **Share** → **Add to Album** → **Website** (the Photos app's own option, which doesn't duplicate anything), then run the shortcut. iOS Shortcuts has no action that adds an existing photo to an album (*Save to Photos* saves a new copy), so the shortcut is no longer in the share sheet: anything it posted from there wouldn't be in the album, and the next sync would remove it. Photos uploaded any other way (test script, GitHub's Upload files) are removed at the next sync unless they're also in the album.
 - **Order:** newest first, by the date the photo was taken (EXIF), falling back to the date at the start of the filename.
 - `photos/` and `scripts/` are excluded from the published site in `_config.yml`. Only the metadata-stripped copies are public on jamesaletsch.com. The originals are still visible in the GitHub repo itself if it's public, which is why the shortcut strips metadata before uploading.
 
@@ -85,7 +85,7 @@ Why it's built this way:
 - **Preserve Metadata: off** is what strips the GPS location before anything leaves the phone.
 - GitHub rejects uploading to a name that already exists ("sha wasn't supplied", 422), so a mistake can't overwrite or duplicate a photo.
 - **Removals happen on GitHub, not the phone** (`scripts/apply_album_sync.py`, run by the Action). Every run uploads the album's list of names. Safety checks: nothing is removed if the list is empty, or if it would remove more than half the photos. A refused sync turns the Action run red and explains why in `sync/report.txt`. Every removal can be undone from git history.
-- **Time zones:** file names use the phone's time zone. Abroad, names shift by hours, so album runs would re-upload everything under new names (and the sync would refuse to remove the old ones). Turn the daily automation off while travelling.
+- **Time zones:** file names use the phone's time zone. Abroad, names shift by hours, so album runs would re-upload everything under new names (and the sync would refuse to remove the old ones). Don't run the shortcut while your phone is in another time zone.
 - `sync/report.txt` always shows the last sync: how many photos were in the album, on the site, and what was removed. Removals are live (`ALBUM_SYNC_DRY_RUN: "false"` in `.github/workflows/gallery.yml`); set it to `"true"` to go back to only reporting what *would* be removed.
 
 ### Troubleshooting (things that went wrong while building it)
@@ -103,9 +103,16 @@ Why it's built this way:
 
 To debug, a temporary **Show Alert** showing a variable (e.g. *Posted*, or `Checking [Formatted Date].jpg`) is the quickest way to see what the shortcut is doing. Remove it afterwards.
 
-## 4. Automation
+## 4. Running it
 
-Shortcuts → Automation → **+** → **Time of Day** → Daily → **Run Immediately** → *Post to Website*. The first time, iOS asks to let it send photos to api.github.com: choose **Always Allow**. If the Photos app is set to **Require Face ID**, runs while the phone is locked may fail. Turn that off, or run the shortcut yourself while the phone is unlocked. Add more times of day if you want it to run more often. To post straight away, add photos to the album, then run *Post to Website* from the Shortcuts app, a Home Screen icon or widget, or "Hey Siri, Post to Website".
+**Run it by hand** after adding photos to (or removing them from) the Website album: from the Shortcuts app, a Home Screen icon (press and hold the shortcut → Share → Add to Home Screen), a Shortcuts widget, or "Hey Siri, Post to Website". The first time, iOS asks to let it send photos to api.github.com: choose **Always Allow**.
+
+A daily *Time of Day* automation is possible but not recommended:
+
+- Abroad, file names shift with the time zone, so an unattended run would re-upload every photo under new names (and the sync would then remove the old ones).
+- While the phone is locked, the Photos **Require Face ID** setting or iCloud downloads can make it fail with nobody watching.
+- Anything added to the album goes live without a final look.
+- Every run commits an album list and a report, even when nothing changed.
 
 Anything in the Website album gets published; anything removed from it is taken down at the next run.
 
